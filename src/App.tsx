@@ -4,7 +4,7 @@ import './App.css'
 function App() {
   return (
     <div className="page">
-      <img src={reynLogo} alt="REYN. — Redefine the Standard" className="logo" />
+      <img src={reynLogo} alt="REYN. Redefine the Standard" className="logo" />
 
       <p className="tagline">Launching Soon</p>
 
