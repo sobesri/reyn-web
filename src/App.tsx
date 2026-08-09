@@ -6,6 +6,7 @@ import { LaunchStatus } from './components/LaunchStatus'
 import { Manifesto } from './components/Manifesto'
 import { Marquee } from './components/Marquee'
 import { SiteFooter } from './components/SiteFooter'
+import { SizeChart } from './components/SizeChart'
 import { collectionTags } from './constants/collections'
 import { usePointerGlow } from './hooks/usePointerGlow'
 import { useReveal } from './hooks/useReveal'
@@ -70,6 +71,7 @@ function App() {
         <Manifesto />
         <Collections />
         <Gallery />
+        <SizeChart />
         <TagCloud />
         <LaunchStatus />
         <Connect />

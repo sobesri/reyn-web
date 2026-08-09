@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { sectionNumber } from '../constants/sections'
 
 const pillars = [
   {
@@ -19,7 +20,7 @@ export function Manifesto() {
   return (
     <section className="section manifesto" id="manifesto">
       <p className="eyebrow" data-reveal>
-        01 / What is REYN
+        {sectionNumber('manifesto')} / What is REYN
       </p>
 
       <h2 className="section__title" data-reveal>

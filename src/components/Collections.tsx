@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react'
 import { collections } from '../constants/collections'
+import { sectionNumber } from '../constants/sections'
 
 export function Collections() {
   return (
@@ -7,7 +8,7 @@ export function Collections() {
       <div className="section__head">
         <div>
           <p className="eyebrow" data-reveal>
-            02 / Our collections
+            {sectionNumber('collections')} / Our collections
           </p>
           <h2 className="section__title display" data-reveal>
             One vision. Five worlds.
