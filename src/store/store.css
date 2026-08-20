@@ -627,6 +627,10 @@
   border: 0;
   background: none;
   font: inherit;
+  /* Form controls do not inherit these from the UA stylesheet, so the button
+     would render sentence case beside uppercase links. */
+  letter-spacing: inherit;
+  text-transform: inherit;
   color: var(--muted);
   cursor: pointer;
 }
