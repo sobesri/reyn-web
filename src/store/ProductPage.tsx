@@ -21,6 +21,7 @@ import {
   whatsappLink,
 } from '../constants/shop'
 import { sizes as allSizes } from '../constants/sizing'
+import { HowToOrder } from './HowToOrder'
 import { SizeGuideButton } from './SizeGuideButton'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
@@ -280,7 +281,7 @@ function ProductView({ slug }: { slug: string }) {
                 disabled={!canOrder}
                 onClick={orderViaInstagram}
               >
-                {soldOut ? 'Sold out' : size ? 'Copy details & open Instagram' : 'Select a size'}
+                {soldOut ? 'Sold out' : size ? 'Order Via Instagram' : 'Select a size'}
               </button>
             )}
 
@@ -298,7 +299,8 @@ function ProductView({ slug }: { slug: string }) {
             )}
 
             <p className="product__note">
-              Orders are confirmed over {orderChannel} for now. Island-wide delivery from Colombo.
+              Orders are confirmed over {orderChannel}. Island-wide delivery from Colombo.{' '}
+              <HowToOrder />
             </p>
           </div>
         </div>

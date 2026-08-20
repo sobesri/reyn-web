@@ -9,9 +9,9 @@ export function Connect() {
         <p className="eyebrow">{sectionNumber('connect')} / Stay close</p>
         <h2 className="connect__title">Follow our socials for updates.</h2>
         <p className="connect__body">
-          We sell online and through our socials, so that is where everything happens first: every
-          drop, every restock, everything behind the scenes. Follow along and you&rsquo;ll know the
-          moment we go live.
+          We sell online and through our socials, so that is where everything happens first: new
+          drops, restocks and everything behind the scenes. Follow along so you don&rsquo;t miss a
+          release.
         </p>
 
         <ul className="connect__links">

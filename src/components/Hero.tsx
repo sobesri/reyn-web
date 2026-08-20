@@ -21,11 +21,6 @@ export function Hero() {
       </div>
 
       <div className="hero__inner">
-        <p className="chip" style={{ '--delay': '0.05s' } as CSSProperties}>
-          <span className="chip__dot" aria-hidden="true" />
-          Launching Soon
-        </p>
-
         <img
           src={reynLogo}
           alt="REYN. Redefine the Standard"
@@ -40,7 +35,7 @@ export function Hero() {
         </h1>
 
         <p className="hero__sub" style={{ '--delay': '0.4s' } as CSSProperties}>
-          One vision, five worlds. Heavyweight cotton, limited drops that do not come back.
+          One vision, five worlds. Thirty designs in heavyweight cotton, shipping island-wide.
         </p>
 
         <div className="hero__actions" style={{ '--delay': '0.5s' } as CSSProperties}>

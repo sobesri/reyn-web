@@ -21,16 +21,19 @@ export function StoreImage({ publicId, alt, label, sizes, eager, className }: St
   const candidates = (Array.isArray(publicId) ? publicId : [publicId]).filter(Boolean)
   const key = candidates.join('|')
 
-  const [attempt, setAttempt] = useState(0)
+  // Track ids that failed rather than counting error events: with srcset one
+  // element can fire error more than once, which would otherwise skip past a
+  // candidate that would have loaded fine.
+  const [failed, setFailed] = useState<string[]>([])
   const [lastKey, setLastKey] = useState(key)
 
   // A different set of candidates deserves a fresh attempt.
   if (lastKey !== key) {
     setLastKey(key)
-    setAttempt(0)
+    setFailed([])
   }
 
-  const current = candidates[attempt]
+  const current = candidates.find((id) => !failed.includes(id))
 
   if (!isCloudinaryConfigured || !current) {
     return (
@@ -55,7 +58,7 @@ export function StoreImage({ publicId, alt, label, sizes, eager, className }: St
       alt={alt}
       loading={eager ? 'eager' : 'lazy'}
       decoding="async"
-      onError={() => setAttempt((n) => n + 1)}
+      onError={() => setFailed((ids) => (ids.includes(current) ? ids : [...ids, current]))}
     />
   )
 }

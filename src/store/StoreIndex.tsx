@@ -81,11 +81,11 @@ export function StoreIndex() {
                         alt={product.name}
                         label={product.name}
                       />
+                      <span className="product-card__collection">{product.collection}</span>
                       {soldOut && <span className="product-card__flag">Sold out</span>}
                     </div>
 
                     <div className="product-card__body">
-                      <span className="product-card__collection">{product.collection}</span>
                       <h2 className="product-card__name">{product.name}</h2>
                       <p className="product-card__price">
                         {formatPrice(product.price)}

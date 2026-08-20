@@ -2,8 +2,8 @@ import { Collections } from './components/Collections'
 import { Connect } from './components/Connect'
 import { Gallery } from './components/Gallery'
 import { Hero } from './components/Hero'
-import { LaunchStatus } from './components/LaunchStatus'
 import { Manifesto } from './components/Manifesto'
+import { Ordering } from './components/Ordering'
 import { Marquee } from './components/Marquee'
 import { SiteFooter } from './components/SiteFooter'
 import { StoreFab } from './components/StoreFab'
@@ -13,7 +13,7 @@ import { usePointerGlow } from './hooks/usePointerGlow'
 import { useReveal } from './hooks/useReveal'
 import './App.css'
 
-const phrases = ['Redefine the Standard', 'One Vision · Five Worlds', 'Launching Soon', 'Made in Colombo']
+const phrases = ['Redefine the Standard', 'One Vision · Five Worlds', 'Shipping Island-wide', 'Made in Colombo']
 
 // Two passes so a single marquee set stays wider than the viewport.
 const statement = [...phrases, ...phrases]
@@ -74,7 +74,7 @@ function App() {
         <Gallery />
         <SizeChart />
         <TagCloud />
-        <LaunchStatus />
+        <Ordering />
         <Connect />
       </main>
 
