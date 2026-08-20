@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import reynLogo from '../assets/reyn-logo-2.png'
 import { socialLinks } from '../constants/socials'
 import { SocialIcon } from './Socials'
@@ -14,6 +15,9 @@ export function SiteFooter() {
               <img src={reynLogo} alt="REYN." className="footer__logo" />
             </span>
             <p className="footer__tag">Redefine the Standard · Colombo, Sri Lanka</p>
+            <Link className="footer__store-link" to="/store">
+              Shop the store →
+            </Link>
           </div>
 
           <ul className="footer__socials">

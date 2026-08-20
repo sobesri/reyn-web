@@ -6,6 +6,7 @@ import { LaunchStatus } from './components/LaunchStatus'
 import { Manifesto } from './components/Manifesto'
 import { Marquee } from './components/Marquee'
 import { SiteFooter } from './components/SiteFooter'
+import { StoreFab } from './components/StoreFab'
 import { SizeChart } from './components/SizeChart'
 import { collectionTags } from './constants/collections'
 import { usePointerGlow } from './hooks/usePointerGlow'
@@ -78,6 +79,7 @@ function App() {
       </main>
 
       <SiteFooter />
+      <StoreFab />
     </div>
   )
 }

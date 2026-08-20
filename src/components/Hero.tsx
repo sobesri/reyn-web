@@ -1,4 +1,5 @@
 import type { CSSProperties } from 'react'
+import { Link } from 'react-router-dom'
 import reynLogo from '../assets/reyn-logo-2.png'
 
 export function Hero() {
@@ -43,9 +44,9 @@ export function Hero() {
         </p>
 
         <div className="hero__actions" style={{ '--delay': '0.5s' } as CSSProperties}>
-          <a className="btn btn--solid" href="#connect">
-            Follow for updates
-          </a>
+          <Link className="btn btn--solid" to="/store">
+            Shop the store
+          </Link>
           <a className="btn btn--ghost" href="#collections">
             See the collections
           </a>

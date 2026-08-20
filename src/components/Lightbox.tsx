@@ -1,4 +1,5 @@
 import { useCallback, useEffect } from 'react'
+import { createPortal } from 'react-dom'
 
 export type LightboxItem = {
   src: string
@@ -11,10 +12,12 @@ type LightboxProps = {
   index: number | null
   onIndexChange: (index: number) => void
   onClose: () => void
+  /** Extra class on the overlay, e.g. to allow panning a wide chart. */
+  className?: string
 }
 
 /** Full-screen image viewer. Escape closes, arrows step when there is more than one item. */
-export function Lightbox({ items, index, onIndexChange, onClose }: LightboxProps) {
+export function Lightbox({ items, index, onIndexChange, onClose, className }: LightboxProps) {
   const step = useCallback(
     (delta: number) => {
       if (index === null) return
@@ -47,8 +50,14 @@ export function Lightbox({ items, index, onIndexChange, onClose }: LightboxProps
   const active = items[index]
   const multiple = items.length > 1
 
-  return (
-    <div className="lightbox" role="dialog" aria-modal="true" aria-label={active.title} onClick={onClose}>
+  return createPortal(
+    <div
+      className={['lightbox', className].filter(Boolean).join(' ')}
+      role="dialog"
+      aria-modal="true"
+      aria-label={active.title}
+      onClick={onClose}
+    >
       <button className="lightbox__close" type="button" aria-label="Close" onClick={onClose}>
         ✕
       </button>
@@ -92,6 +101,7 @@ export function Lightbox({ items, index, onIndexChange, onClose }: LightboxProps
           ›
         </button>
       )}
-    </div>
+    </div>,
+    document.body,
   )
 }

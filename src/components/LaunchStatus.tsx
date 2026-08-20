@@ -13,8 +13,8 @@ type Step = {
 const steps: Step[] = [
   { label: 'Collections designed', note: 'Five worlds, locked', state: 'done' },
   { label: 'Artwork to print', note: 'Samples approved', state: 'done' },
-  { label: 'Packaging', note: 'In production now', state: 'active' },
-  { label: 'We go live', note: 'Order online + socials', state: 'next' },
+  { label: 'Packaging', note: 'Sorted and signed off', state: 'done' },
+  { label: 'We go live', note: 'Order online + socials', state: 'active' },
 ]
 
 const stateLabel: Record<StepState, string> = {
@@ -30,12 +30,12 @@ export function LaunchStatus() {
         Where we are
       </p>
       <h2 className="section__title status__title" data-reveal>
-        We&rsquo;re in the last stretch before we go live.
+        Everything&rsquo;s in. All that&rsquo;s left is opening the doors.
       </h2>
       <p className="section__lede" data-reveal>
-        The line is designed, the artwork is signed off and the tees are real. We&rsquo;re waiting on
-        packaging to land. Once it does, we open for orders online and through our socials, and
-        this page becomes the shop.
+        The line is designed, the artwork is signed off, the tees are real and the packaging is
+        sorted. Next stop is launch: we open for orders online and through our socials, and this
+        page becomes the shop.
       </p>
 
       <ol className="steps" data-reveal>
