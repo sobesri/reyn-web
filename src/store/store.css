@@ -667,3 +667,41 @@
     left: 0;
   }
 }
+
+/* Order details shown after copying, for the Instagram flow */
+.product__copied {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid color-mix(in srgb, var(--tint, var(--accent)) 40%, transparent);
+  border-radius: calc(var(--radius) - 6px);
+  background: color-mix(in srgb, var(--tint, var(--accent)) 8%, transparent);
+  font-size: 13.5px;
+  color: var(--paper);
+}
+
+.product__copied pre {
+  margin: 10px 0 0;
+  padding: 12px;
+  border-radius: 8px;
+  background: rgba(8, 8, 10, 0.6);
+  font-family: var(--mono);
+  font-size: 12px;
+  line-height: 1.6;
+  color: var(--muted);
+  white-space: pre-wrap;
+  word-break: break-word;
+  user-select: all;
+}
+
+/* A disabled <button> needs the same treatment the anchor variant gets */
+.product__buy:disabled {
+  background: var(--ink-raised);
+  color: var(--muted-dim);
+  border: 1px solid var(--ink-line);
+  cursor: not-allowed;
+}
+
+.product__buy:disabled:hover {
+  transform: none;
+  background: var(--ink-raised);
+}

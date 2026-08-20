@@ -13,7 +13,13 @@ import {
   type ProductColor,
   type Size,
 } from '../constants/products'
-import { orderChannel, orderLink } from '../constants/shop'
+import {
+  hasWhatsApp,
+  INSTAGRAM_URL,
+  orderChannel,
+  orderMessage,
+  whatsappLink,
+} from '../constants/shop'
 import { sizes as allSizes } from '../constants/sizing'
 import { SizeGuideButton } from './SizeGuideButton'
 import { StoreImage } from './StoreImage'
@@ -42,6 +48,7 @@ function ProductView({ slug }: { slug: string }) {
   const [activeImage, setActiveImage] = useState(0)
   const [size, setSize] = useState<Size | null>(null)
   const [quantity, setQuantity] = useState(1)
+  const [copied, setCopied] = useState<boolean | null>(null)
 
   if (!product) {
     return (
@@ -67,6 +74,26 @@ function ProductView({ slug }: { slug: string }) {
   const sizesForColor = availableSizes(product, color)
   const maxForSelection = stockFor(product, color, size)
   const canOrder = !soldOut && color !== null && size !== null && quantity > 0 && quantity <= maxForSelection
+
+  const message =
+    color && size
+      ? orderMessage({
+          productName: product.name,
+          collection: product.collection,
+          color,
+          size,
+          quantity,
+        })
+      : ''
+
+  // Instagram cannot prefill a DM, so copy the details and open the profile.
+  // Both calls stay inside the click so the popup blocker allows the tab.
+  function orderViaInstagram() {
+    const copying = navigator.clipboard?.writeText(message)
+    window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')
+    if (copying) copying.then(() => setCopied(true)).catch(() => setCopied(false))
+    else setCopied(false)
+  }
 
   return (
     <StoreShell>
@@ -233,18 +260,42 @@ function ProductView({ slug }: { slug: string }) {
               </div>
             )}
 
-            <a
-              className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
-              href={canOrder ? orderLink(`${product.name} (${color})`, size!, quantity) : undefined}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-disabled={!canOrder}
-              onClick={(e) => {
-                if (!canOrder) e.preventDefault()
-              }}
-            >
-              {soldOut ? 'Sold out' : size ? `Order on ${orderChannel}` : 'Select a size'}
-            </a>
+            {hasWhatsApp ? (
+              <a
+                className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
+                href={canOrder ? whatsappLink(message) : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!canOrder}
+                onClick={(e) => {
+                  if (!canOrder) e.preventDefault()
+                }}
+              >
+                {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}
+              </a>
+            ) : (
+              <button
+                type="button"
+                className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
+                disabled={!canOrder}
+                onClick={orderViaInstagram}
+              >
+                {soldOut ? 'Sold out' : size ? 'Copy details & open Instagram' : 'Select a size'}
+              </button>
+            )}
+
+            {copied !== null && (
+              <div className="product__copied" role="status">
+                {copied ? (
+                  <p>Order details copied. Paste them into the DM and send.</p>
+                ) : (
+                  <>
+                    <p>Copy these details into the DM:</p>
+                    <pre>{message}</pre>
+                  </>
+                )}
+              </div>
+            )}
 
             <p className="product__note">
               Orders are confirmed over {orderChannel} for now. Island-wide delivery from Colombo.

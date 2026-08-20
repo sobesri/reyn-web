@@ -443,13 +443,15 @@ export function isSoldOut(product: Product) {
   return totalStock(product) === 0
 }
 
-/** First available image across colourways, for listing cards. */
-export function coverImage(product: Product): string {
-  for (const color of offeredColors(product)) {
-    const first = product.images[color]?.[0]
-    if (first) return first
-  }
-  return ''
+/**
+ * Cover candidates for a listing card: the first image of each colourway, in
+ * order. The card tries each in turn, so a piece still shows a photo while
+ * some colourways are yet to be uploaded.
+ */
+export function coverImages(product: Product): string[] {
+  return offeredColors(product)
+    .map((color) => product.images[color]?.[0])
+    .filter((id): id is string => Boolean(id))
 }
 
 export function findProduct(slug: string) {

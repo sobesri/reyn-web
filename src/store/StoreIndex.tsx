@@ -4,7 +4,7 @@ import { collections, type CollectionName } from '../constants/collections'
 import {
   availableColors,
   colorSwatch,
-  coverImage,
+  coverImages,
   formatPrice,
   isSoldOut,
   offeredColors,
@@ -77,7 +77,7 @@ export function StoreIndex() {
                   <Link to={`/store/${product.slug}`}>
                     <div className="product-card__media">
                       <StoreImage
-                        publicId={coverImage(product)}
+                        publicId={coverImages(product)}
                         alt={product.name}
                         label={product.name}
                       />
