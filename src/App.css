@@ -1485,3 +1485,76 @@
     display: none;
   }
 }
+
+/* ==========================================================================
+   Scroll to top
+   ========================================================================== */
+
+.scroll-top {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 39;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  background: rgba(16, 16, 20, 0.82);
+  backdrop-filter: blur(10px);
+  font: inherit;
+  font-size: 16px;
+  line-height: 1;
+  color: var(--paper);
+  cursor: pointer;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition:
+    opacity 260ms ease,
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    visibility 260ms,
+    border-color 200ms ease,
+    background-color 200ms ease;
+}
+
+.scroll-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+}
+
+.scroll-top:hover {
+  border-color: var(--accent);
+  background: rgba(212, 166, 75, 0.16);
+}
+
+/* Landing page: both controls share one right-aligned row. The scroll button
+   keeps its slot when hidden, so the store button never shifts. */
+.floating-actions {
+  position: fixed;
+  right: clamp(16px, 3vw, 32px);
+  bottom: clamp(16px, 3vw, 32px);
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.floating-actions .scroll-top,
+.floating-actions .store-fab {
+  position: static;
+  right: auto;
+  bottom: auto;
+}
+
+@media (max-width: 640px) {
+  .scroll-top {
+    width: 40px;
+    height: 40px;
+  }
+
+}

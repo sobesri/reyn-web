@@ -796,3 +796,30 @@
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* On phones the filter bar sticks under the nav so a collection can be
+   changed without scrolling back up through thirty products. */
+@media (max-width: 640px) {
+  .store-filters {
+    position: sticky;
+    top: var(--store-nav-h, 96px);
+    z-index: 15;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: 10px var(--gutter);
+    background: rgba(8, 8, 10, 0.92);
+    backdrop-filter: blur(12px);
+    /* One scrollable row instead of two wrapped rows, to keep it shallow. */
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+  }
+
+  .store-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .store-filter {
+    flex: 0 0 auto;
+  }
+}

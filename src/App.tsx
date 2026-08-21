@@ -5,6 +5,7 @@ import { Hero } from './components/Hero'
 import { Manifesto } from './components/Manifesto'
 import { Ordering } from './components/Ordering'
 import { Marquee } from './components/Marquee'
+import { ScrollToTop } from './components/ScrollToTop'
 import { SiteFooter } from './components/SiteFooter'
 import { StoreFab } from './components/StoreFab'
 import { SizeChart } from './components/SizeChart'
@@ -79,7 +80,10 @@ function App() {
       </main>
 
       <SiteFooter />
-      <StoreFab />
+      <div className="floating-actions">
+        <ScrollToTop />
+        <StoreFab />
+      </div>
     </div>
   )
 }
