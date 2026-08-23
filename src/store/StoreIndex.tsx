@@ -13,6 +13,8 @@ import {
 } from '../constants/products'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
+import { usePageView } from '../hooks/usePageView'
+import { itemFor, trackEvent } from '../lib/analytics'
 
 type Filter = CollectionName | 'All'
 
@@ -21,6 +23,7 @@ const tintFor = (name: CollectionName) =>
 
 export function StoreIndex() {
   const [filter, setFilter] = useState<Filter>('All')
+  usePageView('Store')
 
   const visible = useMemo(
     () => (filter === 'All' ? products : products.filter((p) => p.collection === filter)),
@@ -74,7 +77,15 @@ export function StoreIndex() {
                   key={product.slug}
                   style={{ '--tint': tintFor(product.collection) } as CSSProperties}
                 >
-                  <Link to={`/store/${product.slug}`}>
+                  <Link
+                    to={`/store/${product.slug}`}
+                    onClick={() =>
+                      trackEvent('select_item', {
+                        item_list_name: `Store · ${filter}`,
+                        items: [itemFor(product)],
+                      })
+                    }
+                  >
                     <div className="product-card__media">
                       <StoreImage
                         publicId={coverImages(product)}

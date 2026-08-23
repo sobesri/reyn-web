@@ -458,10 +458,13 @@ export function findProduct(slug: string) {
   return products.find((product) => product.slug === slug)
 }
 
+/** ISO 4217 code, shared by formatPrice and the analytics ecommerce events. */
+export const CURRENCY = 'LKR'
+
 export function formatPrice(amount: number) {
   return new Intl.NumberFormat('en-LK', {
     style: 'currency',
-    currency: 'LKR',
+    currency: CURRENCY,
     maximumFractionDigits: 0,
   }).format(amount)
 }

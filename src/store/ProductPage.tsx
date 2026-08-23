@@ -1,8 +1,9 @@
-import { useState, type CSSProperties } from 'react'
+import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
 import { collections } from '../constants/collections'
 import {
   availableColors,
+  CURRENCY,
   availableSizes,
   colorSwatch,
   findProduct,
@@ -25,6 +26,8 @@ import { HowToOrder } from './HowToOrder'
 import { SizeGuideButton } from './SizeGuideButton'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
+import { usePageView } from '../hooks/usePageView'
+import { itemFor, trackEvent } from '../lib/analytics'
 
 export function ProductPage() {
   const { slug = '' } = useParams()
@@ -50,6 +53,17 @@ function ProductView({ slug }: { slug: string }) {
   const [size, setSize] = useState<Size | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [copied, setCopied] = useState<boolean | null>(null)
+
+  usePageView(product ? `${product.name} · ${product.collection}` : 'Not found')
+
+  useEffect(() => {
+    if (!product) return
+    trackEvent('view_item', {
+      currency: CURRENCY,
+      value: product.price,
+      items: [itemFor(product)],
+    })
+  }, [product])
 
   if (!product) {
     return (
@@ -87,9 +101,24 @@ function ProductView({ slug }: { slug: string }) {
         })
       : ''
 
+  // The order is completed off-site, so this click is the last thing we can
+  // measure. begin_checkout carries the variant and quantity so the store
+  // report shows which colourway and size actually sell.
+  const trackOrder = (channel: string) => {
+    trackEvent('begin_checkout', {
+      currency: CURRENCY,
+      value: product.price * quantity,
+      order_channel: channel,
+      items: [
+        itemFor(product, { item_variant: `${color} / ${size}`, quantity }),
+      ],
+    })
+  }
+
   // Instagram cannot prefill a DM, so copy the details and open the profile.
   // Both calls stay inside the click so the popup blocker allows the tab.
   function orderViaInstagram() {
+    trackOrder('Instagram')
     const copying = navigator.clipboard?.writeText(message)
     window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')
     if (copying) copying.then(() => setCopied(true)).catch(() => setCopied(false))
@@ -269,7 +298,11 @@ function ProductView({ slug }: { slug: string }) {
                 rel="noopener noreferrer"
                 aria-disabled={!canOrder}
                 onClick={(e) => {
-                  if (!canOrder) e.preventDefault()
+                  if (!canOrder) {
+                    e.preventDefault()
+                    return
+                  }
+                  trackOrder('WhatsApp')
                 }}
               >
                 {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}

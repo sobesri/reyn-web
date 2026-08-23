@@ -12,6 +12,7 @@ import { SizeChart } from './components/SizeChart'
 import { collectionTags } from './constants/collections'
 import { usePointerGlow } from './hooks/usePointerGlow'
 import { useReveal } from './hooks/useReveal'
+import { usePageView } from './hooks/usePageView'
 import './App.css'
 
 const phrases = ['Redefine the Standard', 'One Vision · Five Worlds', 'Shipping Island-wide', 'Made in Colombo']
@@ -61,6 +62,7 @@ function TagCloud() {
 function App() {
   useReveal()
   usePointerGlow()
+  usePageView('Reyn Atelier')
 
   return (
     <div className="site">

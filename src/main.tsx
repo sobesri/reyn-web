@@ -7,6 +7,9 @@ import App from './App.tsx'
 import { ProductPage } from './store/ProductPage.tsx'
 import { StoreIndex } from './store/StoreIndex.tsx'
 import { ScrollBehaviour } from './store/ScrollBehaviour.tsx'
+import { startAnalytics } from './lib/analytics.ts'
+
+startAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
