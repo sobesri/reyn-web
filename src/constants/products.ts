@@ -44,7 +44,7 @@ export const LAUNCH_PRICE = 3299
 export const RRP = 3799
 
 /**
- * First stock plan: 30 designs, 180 units (106 black, 74 white).
+ * First stock plan: 30 designs, 178 units on hand (106 black, 72 white).
  * Generated from the stock spreadsheet; quantities are units on hand.
  */
 export const products: Product[] = [
@@ -228,7 +228,7 @@ export const products: Product[] = [
     images: { Black: ['Limitless_black'], White: ['Limitless_white'] },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      White: { S: 1, M: 1, L: 0, XL: 0 },
     },
   },
   {
@@ -312,7 +312,7 @@ export const products: Product[] = [
     images: { Black: ['Innocent_black'], White: ['Innocent_white'] },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      White: { S: 1, M: 1, L: 0, XL: 0 },
     },
   },
   {
@@ -358,7 +358,7 @@ export const products: Product[] = [
     images: { Black: ['Freedom_black'], White: ['Freedom_white'] },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      White: { S: 1, M: 2, L: 0, XL: 0 },
     },
   },
   {
@@ -370,7 +370,7 @@ export const products: Product[] = [
     images: { Black: ['Chaos_black'], White: ['Chaos_white'] },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      White: { S: 1, M: 2, L: 0, XL: 0 },
     },
   },
   {
@@ -381,8 +381,8 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['Focus_black'], White: ['Focus_white'] },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      Black: { S: 0, M: 2, L: 1, XL: 0 },
+      White: { S: 1, M: 2, L: 0, XL: 0 },
     },
   },
   {
