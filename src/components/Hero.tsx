@@ -1,8 +1,11 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import reynLogo from '../assets/reyn-logo-2.png'
+import { useDesignCount } from '../hooks/useDesignCount'
 
 export function Hero() {
+  const designs = useDesignCount()
+
   return (
     <section className="hero" id="top">
       <div className="hero__aurora" aria-hidden="true">
@@ -35,7 +38,7 @@ export function Hero() {
         </h1>
 
         <p className="hero__sub" style={{ '--delay': '0.4s' } as CSSProperties}>
-          One vision, five worlds. Thirty designs in heavyweight cotton, shipping island-wide.
+          One vision, five worlds. {designs} designs in heavyweight cotton, shipping island-wide.
         </p>
 
         <div className="hero__actions" style={{ '--delay': '0.5s' } as CSSProperties}>

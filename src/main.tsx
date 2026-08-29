@@ -8,19 +8,22 @@ import { ProductPage } from './store/ProductPage.tsx'
 import { StoreIndex } from './store/StoreIndex.tsx'
 import { ScrollBehaviour } from './store/ScrollBehaviour.tsx'
 import { startAnalytics } from './lib/analytics.ts'
+import { StatsigAnalytics } from './lib/statsig.tsx'
 
 startAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <BrowserRouter>
-      <ScrollBehaviour />
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/store" element={<StoreIndex />} />
-        <Route path="/store/:slug" element={<ProductPage />} />
-        <Route path="*" element={<App />} />
-      </Routes>
-    </BrowserRouter>
+    <StatsigAnalytics>
+      <BrowserRouter>
+        <ScrollBehaviour />
+        <Routes>
+          <Route path="/" element={<App />} />
+          <Route path="/store" element={<StoreIndex />} />
+          <Route path="/store/:slug" element={<ProductPage />} />
+          <Route path="*" element={<App />} />
+        </Routes>
+      </BrowserRouter>
+    </StatsigAnalytics>
   </StrictMode>,
 )

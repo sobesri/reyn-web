@@ -3,16 +3,15 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { collections, type CollectionName } from '../constants/collections'
 import {
   availableColors,
-  colorSwatch,
   coverImages,
   formatPrice,
   isSoldOut,
   offeredColors,
-  products,
   sizesInStock,
 } from '../constants/products'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
+import { useCatalog, useSwatch } from '../hooks/useCatalog'
 import { usePageView } from '../hooks/usePageView'
 import { itemFor, trackEvent } from '../lib/analytics'
 
@@ -41,9 +40,14 @@ export function StoreIndex() {
 
   usePageView('Store')
 
+  // Statsig can correct stock and pricing here between deploys; the bundled
+  // catalogue is what renders until it does.
+  const catalog = useCatalog()
+  const swatch = useSwatch()
+
   const visible = useMemo(
-    () => (filter === 'All' ? products : products.filter((p) => p.collection === filter)),
-    [filter],
+    () => (filter === 'All' ? catalog : catalog.filter((p) => p.collection === filter)),
+    [catalog, filter],
   )
 
   return (
@@ -129,7 +133,7 @@ export function StoreIndex() {
                           <li
                             key={colorway}
                             className={colorsLeft.includes(colorway) ? '' : 'is-out'}
-                            style={{ '--swatch': colorSwatch[colorway] } as CSSProperties}
+                            style={{ '--swatch': swatch(colorway) } as CSSProperties}
                           />
                         ))}
                       </ul>

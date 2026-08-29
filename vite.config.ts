@@ -51,4 +51,7 @@ function sitemap(): Plugin {
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), sitemap()],
+  // Vite only inlines VITE_* by default; STATSIG_CLIENT_KEY is a public client
+  // key that has to reach the browser, so its prefix is allowed through too.
+  envPrefix: ['VITE_', 'STATSIG_'],
 })

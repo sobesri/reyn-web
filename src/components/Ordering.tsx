@@ -1,9 +1,12 @@
 import { orderChannel } from '../constants/shop'
+import { useCatalogSummary } from '../hooks/useDesignCount'
 
-const steps = [
+// Written from the live catalogue so a new colourway or a retired piece does
+// not leave the copy claiming something the store no longer sells.
+const stepsFor = (designs: string, colors: string, sizeRange: string) => [
   {
     label: 'Pick your world',
-    note: 'Five collections, thirty designs. Black or white, S through XL.',
+    note: `Five collections, ${designs.toLowerCase()} designs. ${colors}, ${sizeRange}.`,
   },
   {
     label: 'Choose size and colour',
@@ -16,13 +19,16 @@ const steps = [
 ]
 
 export function Ordering() {
+  const { designs, colors, sizeRange } = useCatalogSummary()
+  const steps = stepsFor(designs, colors, sizeRange)
+
   return (
     <section className="section status" id="ordering">
       <p className="eyebrow" data-reveal>
         How it works
       </p>
       <h2 className="section__title status__title" data-reveal>
-        Thirty designs. Pick your piece.
+        {designs} designs. Pick your piece.
       </h2>
       <p className="section__lede" data-reveal>
         Every tee is a 240GSM oversized fit with a dropped shoulder, printed in limited runs. When a

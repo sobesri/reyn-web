@@ -5,11 +5,10 @@ import {
   availableColors,
   CURRENCY,
   availableSizes,
-  colorSwatch,
-  findProduct,
   formatPrice,
   isSoldOut,
   offeredColors,
+  productSizes,
   stockFor,
   type ProductColor,
   type Size,
@@ -21,11 +20,11 @@ import {
   orderMessage,
   whatsappLink,
 } from '../constants/shop'
-import { sizes as allSizes } from '../constants/sizing'
 import { HowToOrder } from './HowToOrder'
 import { SizeGuideButton } from './SizeGuideButton'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
+import { useProduct, useSwatch } from '../hooks/useCatalog'
 import { usePageView } from '../hooks/usePageView'
 import { itemFor, trackEvent } from '../lib/analytics'
 
@@ -37,7 +36,8 @@ export function ProductPage() {
 }
 
 function ProductView({ slug }: { slug: string }) {
-  const product = findProduct(slug)
+  const product = useProduct(slug)
+  const swatch = useSwatch()
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -48,7 +48,11 @@ function ProductView({ slug }: { slug: string }) {
   }
 
   const inStockColors = product ? availableColors(product) : []
-  const [color, setColor] = useState<ProductColor | null>(inStockColors[0] ?? null)
+  // Only an explicit choice is stored. The colourway actually shown is derived
+  // below, so a piece restocked in the live catalogue after this mounted picks
+  // its first available colourway up on the next render.
+  const [picked, setPicked] = useState<ProductColor | null>(null)
+  const color = picked ?? inStockColors[0] ?? null
   const [activeImage, setActiveImage] = useState(0)
   const [size, setSize] = useState<Size | null>(null)
   const [quantity, setQuantity] = useState(1)
@@ -87,6 +91,9 @@ function ProductView({ slug }: { slug: string }) {
   const colorways = offeredColors(product)
   const gallery = (color && product.images[color]) || []
   const sizesForColor = availableSizes(product, color)
+  // Sizes this piece is actually cut in, so a live catalogue piece with its
+  // own run does not render four buttons where it only has two.
+  const sizeRow = productSizes(product)
   const maxForSelection = stockFor(product, color, size)
   const canOrder = !soldOut && color !== null && size !== null && quantity > 0 && quantity <= maxForSelection
 
@@ -212,11 +219,11 @@ function ProductView({ slug }: { slug: string }) {
                       key={option}
                       type="button"
                       className={`product__color${color === option ? ' is-active' : ''}`}
-                      style={{ '--swatch': colorSwatch[option] } as CSSProperties}
+                      style={{ '--swatch': swatch(option) } as CSSProperties}
                       disabled={outOfStock}
                       aria-pressed={color === option}
                       onClick={() => {
-                        setColor(option)
+                        setPicked(option)
                         setSize(null)
                         setQuantity(1)
                       }}
@@ -237,7 +244,7 @@ function ProductView({ slug }: { slug: string }) {
               </div>
 
               <div className="product__size-row" role="group" aria-label="Choose a size">
-                {allSizes.map((option) => {
+                {sizeRow.map((option) => {
                   const left = stockFor(product, color, option)
                   const disabled = left === 0
                   return (
