@@ -290,33 +290,47 @@ function ProductView({ slug }: { slug: string }) {
               </div>
             )}
 
-            {hasWhatsApp ? (
-              <a
-                className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
-                href={canOrder ? whatsappLink(message) : undefined}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-disabled={!canOrder}
-                onClick={(e) => {
-                  if (!canOrder) {
-                    e.preventDefault()
-                    return
-                  }
-                  trackOrder('WhatsApp')
-                }}
-              >
-                {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}
-              </a>
-            ) : (
-              <button
-                type="button"
-                className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
-                disabled={!canOrder}
-                onClick={orderViaInstagram}
-              >
-                {soldOut ? 'Sold out' : size ? 'Order Via Instagram' : 'Select a size'}
-              </button>
-            )}
+            <div className="product__order">
+              {hasWhatsApp ? (
+                <>
+                  <a
+                    className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
+                    href={canOrder ? whatsappLink(message) : undefined}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-disabled={!canOrder}
+                    onClick={(e) => {
+                      if (!canOrder) {
+                        e.preventDefault()
+                        return
+                      }
+                      trackOrder('WhatsApp')
+                    }}
+                  >
+                    {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}
+                  </a>
+
+                  {/* Secondary channel: the same order, sent as an Instagram DM. */}
+                  <button
+                    type="button"
+                    className="product__buy-alt"
+                    disabled={!canOrder}
+                    onClick={orderViaInstagram}
+                  >
+                    Order on Instagram
+                  </button>
+                </>
+              ) : (
+                <button
+                  type="button"
+                  className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
+                  disabled={!canOrder}
+                  onClick={orderViaInstagram}
+                >
+                  {soldOut ? 'Sold out' : size ? 'Order on Instagram' : 'Select a size'}
+                </button>
+              )}
+            </div>
 
             {copied !== null && (
               <div className="product__copied" role="status">

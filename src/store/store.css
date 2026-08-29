@@ -485,9 +485,49 @@
   opacity: 0.5;
 }
 
-.product__buy {
+/* Primary channel plus a quieter link to the other one. */
+.product__order {
   margin-top: 26px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.product__buy {
   width: 100%;
+}
+
+.product__buy-alt {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--muted) 45%, transparent);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.product__buy-alt:hover {
+  color: var(--paper);
+  text-decoration-color: currentColor;
+}
+
+.product__buy-alt:disabled {
+  color: var(--muted-dim);
+  text-decoration-color: transparent;
+  cursor: not-allowed;
+}
+
+.product__buy-alt:disabled:hover {
+  color: var(--muted-dim);
 }
 
 .product__buy.is-disabled {

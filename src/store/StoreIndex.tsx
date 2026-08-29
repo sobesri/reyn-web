@@ -1,5 +1,5 @@
-import { useMemo, useState, type CSSProperties } from 'react'
-import { Link } from 'react-router-dom'
+import { useMemo, type CSSProperties } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import { collections, type CollectionName } from '../constants/collections'
 import {
   availableColors,
@@ -21,8 +21,24 @@ type Filter = CollectionName | 'All'
 const tintFor = (name: CollectionName) =>
   collections.find((c) => c.name === name)?.accent ?? 'var(--accent)'
 
+const isCollection = (value: string): value is CollectionName =>
+  collections.some((c) => c.name === value)
+
 export function StoreIndex() {
-  const [filter, setFilter] = useState<Filter>('All')
+  // The filter lives in the URL so a collection card on the landing page can
+  // link straight to its own world, and so a filtered store stays shareable
+  // and survives the back button.
+  const [params, setParams] = useSearchParams()
+  const requested = params.get('collection') ?? ''
+  const filter: Filter = isCollection(requested) ? requested : 'All'
+
+  const setFilter = (next: Filter) => {
+    // Replace, not push, so the chips do not fill the history stack: one back
+    // press from the store returns to wherever the visitor came from.
+    if (next === 'All') setParams({}, { replace: true })
+    else setParams({ collection: next }, { replace: true })
+  }
+
   usePageView('Store')
 
   const visible = useMemo(

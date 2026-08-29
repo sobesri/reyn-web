@@ -12,7 +12,7 @@ const steps = hasWhatsApp
       { title: 'Set the quantity', body: 'Capped at the number we actually have on hand.' },
       {
         title: 'Tap "Order on WhatsApp"',
-        body: 'Your order opens as a ready-written message. Just hit send and we will confirm.',
+        body: `Your order opens as a ready-written message. Just hit send and we will confirm. Prefer Instagram? Use the link under the button and we will copy the details for you to paste to ${HANDLE}.`,
       },
     ]
   : [
@@ -20,7 +20,7 @@ const steps = hasWhatsApp
       { title: 'Choose your size', body: 'S to XL. Sizes we are out of are greyed out.' },
       { title: 'Set the quantity', body: 'Capped at the number we actually have on hand.' },
       {
-        title: 'Tap "Order Via Instagram"',
+        title: 'Tap "Order on Instagram"',
         body: `Your order details are copied to your clipboard automatically. Paste them into a message to ${HANDLE} and we will confirm.`,
       },
     ]
@@ -59,7 +59,13 @@ export function HowToOrder() {
         )}
 
         {hasWhatsApp && (
-          <p className="modal__foot">Orders are confirmed over {orderChannel}, then shipped island-wide from Colombo.</p>
+          <p className="modal__foot">
+            Orders are confirmed over {orderChannel} or{' '}
+            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
+              {HANDLE}
+            </a>
+            , then shipped island-wide from Colombo.
+          </p>
         )}
       </Modal>
     </>
