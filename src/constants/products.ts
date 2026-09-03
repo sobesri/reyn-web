@@ -65,8 +65,12 @@ export const LAUNCH_PRICE = 3299
 export const RRP = 3799
 
 /**
- * First stock plan: 30 designs, 178 units on hand (106 black, 72 white).
+ * First stock plan: 29 designs, 171 units on hand (99 black, 72 white).
  * Generated from the stock spreadsheet; quantities are units on hand.
+ *
+ * Cipher shipped a fourth design, Synapse, which was pulled over a print
+ * fault. It is gone from this list, and `hidden` in the Statsig catalogue
+ * pulls it from any build still carrying it.
  */
 export const products: Product[] = [
   {
@@ -75,7 +79,7 @@ export const products: Product[] = [
     collection: 'Aurum',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Hydra_black'] },
+    images: { Black: ['AU-H1', 'AU-H1-F', 'Hydra_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -86,7 +90,7 @@ export const products: Product[] = [
     collection: 'Aurum',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Lupus_black'] },
+    images: { Black: ['AU-W1', 'AU-W1-F', 'Lupus_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -97,7 +101,7 @@ export const products: Product[] = [
     collection: 'Aurum',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Leo_black'], White: ['Leo_white'] },
+    images: { Black: ['AU-L2', 'AU-L2-F', 'Leo_black'], White: ['AU-L1', 'AU-L1-F', 'Leo_white'] },
     stock: {
       Black: { S: 1, M: 1, L: 1, XL: 1 },
       White: { S: 0, M: 1, L: 1, XL: 0 },
@@ -109,9 +113,9 @@ export const products: Product[] = [
     collection: 'Genesis',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Medusa_black'] },
+    images: { Black: ['GS-MT1', 'GS-MT1-F', 'Medusa_black'] },
     stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
+      Black: { S: 0, M: 2, L: 2, XL: 1 },
     },
   },
   {
@@ -120,7 +124,7 @@ export const products: Product[] = [
     collection: 'Genesis',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { White: ['Angel_City_white'] },
+    images: { White: ['GS-AC1', 'GS-AC1-F', 'Angel_City_white'] },
     stock: {
       White: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -131,7 +135,7 @@ export const products: Product[] = [
     collection: 'Genesis',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Susanoo_black'] },
+    images: { Black: ['GS-SO1', 'GS-SO1-F', 'Susanoo_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -142,7 +146,7 @@ export const products: Product[] = [
     collection: 'Cipher',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { White: ['Glitch_God_white'] },
+    images: { White: ['CX-GG1', 'CX-GG1-F', 'Glitch_God_white'] },
     stock: {
       White: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -153,18 +157,7 @@ export const products: Product[] = [
     collection: 'Cipher',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Override_black'] },
-    stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
-    },
-  },
-  {
-    slug: 'cipher-synapse',
-    name: 'Synapse',
-    collection: 'Cipher',
-    price: LAUNCH_PRICE,
-    compareAtPrice: RRP,
-    images: { Black: ['Synapse_black'] },
+    images: { Black: ['CX-OR1', 'CX-OR1-F', 'Override_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -175,7 +168,7 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { White: ['Julius_Online_white'] },
+    images: { White: ['HC-JC1', 'HC-JC1-F', 'Julius_Online_white'] },
     stock: {
       White: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -186,7 +179,10 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Sir_Rendered_black'], White: ['Sir_Rendered_white'] },
+    images: {
+      Black: ['HC-SR1', 'HC-SR1-F', 'Sir_Rendered_black'],
+      White: ['HC-SR2', 'HC-SR2-F', 'Sir_Rendered_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -198,7 +194,10 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Wings_and_Horns_black'], White: ['Wings_and_Horns_white'] },
+    images: {
+      Black: ['HC-WH2', 'HC-WH2-F', 'Wings_and_Horns_black'],
+      White: ['HC-WH1', 'HC-WH1-F', 'Wings_and_Horns_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -210,7 +209,10 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Busy_black'], White: ['Busy_white'] },
+    images: {
+      Black: ['HC-BY1', 'HC-BY1-F', 'Busy_black'],
+      White: ['HC-BY2', 'HC-BY2-F', 'Busy_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -222,7 +224,10 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Emotionally_Available_black'], White: ['Emotionally_Available_white'] },
+    images: {
+      Black: ['HC-EA1', 'HC-EA1-F', 'Emotionally_Available_black'],
+      White: ['HC-EA2', 'HC-EA2-F', 'Emotionally_Available_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -234,7 +239,10 @@ export const products: Product[] = [
     collection: 'Havoc',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Inner_Peace_black'], White: ['Inner_Peace_white'] },
+    images: {
+      Black: ['HC-IP1', 'HC-IP1-F', 'Inner_Peace_black'],
+      White: ['HC-IP2', 'HC-IP2-F', 'Inner_Peace_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -246,7 +254,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Limitless_black'], White: ['Limitless_white'] },
+    images: {
+      Black: ['UD-LS1', 'UD-LS1-F', 'Limitless_black'],
+      White: ['UD-LS2', 'UD-LS2-F', 'Limitless_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 0, XL: 0 },
@@ -258,7 +269,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Loyalty_black'], White: ['Loyalty_white'] },
+    images: {
+      Black: ['UD-LT1', 'UD-LT1-F', 'Loyalty_black'],
+      White: ['UD-LT2', 'UD-LT2-F', 'Loyalty_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -270,7 +284,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Discipline_black'], White: ['Discipline_white'] },
+    images: {
+      Black: ['UD-DP1', 'UD-DP1-F', 'Discipline_black'],
+      White: ['UD-DP2', 'UD-DP2-F', 'Discipline_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -282,7 +299,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Faith_black'], White: ['Faith_white'] },
+    images: {
+      Black: ['UD-FT1', 'UD-FT1-F', 'Faith_black'],
+      White: ['UD-FT2', 'UD-FT2-F', 'Faith_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -294,7 +314,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Beast_black'], White: ['Beast_white'] },
+    images: {
+      Black: ['UD-BT1', 'UD-BT1-F', 'Beast_black'],
+      White: ['UD-BT2', 'UD-BT2-F', 'Beast_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -306,7 +329,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Broken_Pink_black'], White: ['Broken_Pink_white'] },
+    images: {
+      Black: ['UD-BF1', 'UD-BF1-F', 'Broken_Pink_black'],
+      White: ['UD-BF2', 'UD-BF2-F', 'Broken_Pink_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -318,7 +344,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Broken_Orange_black'], White: ['Broken_Orange_white'] },
+    images: {
+      Black: ['UD-BM1', 'UD-BM1-F', 'Broken_Orange_black'],
+      White: ['UD-BM2', 'UD-BM2-F', 'Broken_Orange_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -330,7 +359,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Innocent_black'], White: ['Innocent_white'] },
+    images: {
+      Black: ['UD-IT1', 'UD-IT1-F', 'Innocent_black'],
+      White: ['UD-IT2', 'UD-IT2-F', 'Innocent_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 0, XL: 0 },
@@ -342,7 +374,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Rebel_black'], White: ['Rebel_white'] },
+    images: {
+      Black: ['UD-RL1', 'UD-RL1-F', 'Rebel_black'],
+      White: ['UD-RL2', 'UD-RL2-F', 'Rebel_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -354,7 +389,7 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Rave_Mode_black'] },
+    images: { Black: ['UD-RM', 'UD-RM-F', 'Rave_Mode_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -365,7 +400,7 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Hustle_black'] },
+    images: { Black: ['UD-HE', 'UD-HE-F', 'Hustle_black'] },
     stock: {
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
@@ -376,7 +411,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Freedom_black'], White: ['Freedom_white'] },
+    images: {
+      Black: ['UD-FM1', 'UD-FM1-F', 'Freedom_black'],
+      White: ['UD-FM2', 'UD-FM2-F', 'Freedom_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 2, L: 0, XL: 0 },
@@ -388,7 +426,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Chaos_black'], White: ['Chaos_white'] },
+    images: {
+      Black: ['UD-CS1', 'UD-CS1-F', 'Chaos_black'],
+      White: ['UD-CS2', 'UD-CS2-F', 'Chaos_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 2, L: 0, XL: 0 },
@@ -400,7 +441,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Focus_black'], White: ['Focus_white'] },
+    images: {
+      Black: ['UD-FS1', 'UD-FS1-F', 'Focus_black'],
+      White: ['UD-FS2', 'UD-FS2-F', 'Focus_white'],
+    },
     stock: {
       Black: { S: 0, M: 2, L: 1, XL: 0 },
       White: { S: 1, M: 2, L: 0, XL: 0 },
@@ -412,7 +456,10 @@ export const products: Product[] = [
     collection: 'Untamed',
     price: LAUNCH_PRICE,
     compareAtPrice: RRP,
-    images: { Black: ['Loyalty_II_black'], White: ['Loyalty_II_white'] },
+    images: {
+      Black: ['UD-LY1', 'UD-LY1-F', 'Loyalty_II_black'],
+      White: ['UD-LY2', 'UD-LY2-F', 'Loyalty_II_white'],
+    },
     stock: {
       Black: { S: 0, M: 1, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
@@ -496,6 +543,19 @@ export function isSoldOut(product: Product) {
 export function coverImages(product: Product): string[] {
   return offeredColors(product)
     .map((color) => product.images[color]?.[0])
+    .filter((id): id is string => Boolean(id))
+}
+
+/**
+ * The second view of each colourway, in the same order as coverImages, for
+ * the listing card to reveal on hover. Every piece is shot back then front,
+ * so this is the front of the tee where one has been uploaded. Empty for a
+ * piece with a single image per colourway, and the card then shows no
+ * hover state at all rather than cross-fading to the same photo.
+ */
+export function hoverImages(product: Product): string[] {
+  return offeredColors(product)
+    .map((color) => product.images[color]?.[1])
     .filter((id): id is string => Boolean(id))
 }
 
