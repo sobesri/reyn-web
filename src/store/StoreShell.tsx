@@ -5,6 +5,8 @@ import { socialLinks } from '../constants/socials'
 import { ScrollToTop } from '../components/ScrollToTop'
 import { SocialIcon } from '../components/Socials'
 import { SizeGuideButton } from './SizeGuideButton'
+import { CartButton } from './CartButton'
+import { CartDrawer } from './CartDrawer'
 
 /** Header, footer and page chrome shared by every store route. */
 export function StoreShell({ children }: { children: ReactNode }) {
@@ -41,6 +43,7 @@ export function StoreShell({ children }: { children: ReactNode }) {
             <Link to="/store">Store</Link>
             <Link to="/#collections">Collections</Link>
             <SizeGuideButton />
+            <CartButton />
           </nav>
         </div>
       </header>
@@ -78,6 +81,7 @@ export function StoreShell({ children }: { children: ReactNode }) {
       </footer>
 
       <ScrollToTop />
+      <CartDrawer />
     </div>
   )
 }

@@ -863,3 +863,547 @@
     flex: 0 0 auto;
   }
 }
+
+/* ---------------------------------------------------------------------------
+   Cart
+
+   The store has no checkout: an order is a message. The cart is therefore a
+   basket that composes one message out of several pieces, and the promo strip
+   is the only place the bulk discount is ever quoted.
+   --------------------------------------------------------------------------- */
+
+.cart-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  /* Matches .size-guide-btn: form controls do not inherit these, and the
+     button sits in a row of uppercase nav links. */
+  letter-spacing: inherit;
+  text-transform: inherit;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.cart-btn:hover {
+  color: var(--paper);
+}
+
+.cart-btn__count {
+  min-width: 19px;
+  height: 19px;
+  padding: 0 5px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  background: var(--accent);
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1;
+  letter-spacing: 0;
+  color: var(--accent-ink);
+}
+
+.cart {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  display: flex;
+  justify-content: flex-end;
+  background: rgba(8, 8, 10, 0.72);
+  backdrop-filter: blur(6px);
+  animation: cart-fade 180ms ease;
+}
+
+.cart__panel {
+  width: min(460px, 100%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 22px var(--gutter) calc(var(--gutter) + 8px);
+  background: var(--ink-raised);
+  border-left: 1px solid var(--ink-line);
+  animation: cart-slide 220ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes cart-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes cart-slide {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cart,
+  .cart__panel {
+    animation: none;
+  }
+}
+
+.cart__head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cart__title {
+  margin: 0;
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+}
+
+.cart__count {
+  margin: 4px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.cart__close {
+  flex: 0 0 auto;
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--ink-line);
+  background: none;
+  font-size: 14px;
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+.cart__close:hover {
+  color: var(--paper);
+  border-color: var(--accent-line);
+}
+
+/* The promo strip. Below the threshold it sells the offer; above it, it
+   confirms the saving. Same element either way, so it never shifts the
+   layout as the cart fills. */
+.cart__promo {
+  margin: 18px 0 0;
+  padding: 11px 13px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px;
+  border-radius: 12px;
+  border: 1px solid var(--accent-line);
+  background: var(--accent-soft);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--paper);
+}
+
+.cart__promo-tag {
+  flex: 0 0 auto;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cart__promo.is-earned {
+  border-color: var(--accent);
+}
+
+.cart__notice {
+  margin: 12px 0 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.cart__empty {
+  margin: auto 0;
+  padding: 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.cart__lines {
+  margin: 18px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart__line {
+  display: grid;
+  grid-template-columns: 72px 1fr auto;
+  gap: 14px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--ink-line);
+}
+
+.cart__thumb {
+  display: block;
+  aspect-ratio: 3 / 4;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--ink);
+}
+
+.cart__thumb .store-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart__line-body {
+  min-width: 0;
+}
+
+.cart__line-name {
+  display: block;
+  font-family: var(--display);
+  font-size: 15px;
+  letter-spacing: 0.03em;
+  color: var(--paper);
+  text-decoration: none;
+}
+
+.cart__line-name:hover {
+  color: var(--accent);
+}
+
+.cart__line-variant {
+  margin: 5px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.cart__line-price {
+  margin: 5px 0 0;
+  font-size: 12px;
+  color: var(--muted-dim);
+}
+
+.cart__line-low {
+  margin: 5px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cart__line-side {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.cart__stepper {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  border-radius: 999px;
+  border: 1px solid var(--ink-line);
+}
+
+.cart__stepper button {
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1;
+  color: var(--paper);
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.cart__stepper button:hover:not(:disabled) {
+  color: var(--accent);
+}
+
+.cart__stepper button:disabled {
+  color: var(--muted-dim);
+  cursor: not-allowed;
+}
+
+.cart__stepper span {
+  min-width: 20px;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--paper);
+}
+
+.cart__line-total {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--paper);
+}
+
+.cart__remove {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 11px;
+  color: var(--muted-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.cart__remove:hover {
+  color: var(--paper);
+}
+
+.cart__foot {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.cart__totals {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cart__totals > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.cart__totals dt {
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.cart__totals dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--paper);
+}
+
+.cart__totals-promo dt,
+.cart__totals-promo dd {
+  color: var(--accent);
+}
+
+.cart__totals-due {
+  margin-top: 4px;
+  padding-top: 12px;
+  border-top: 1px solid var(--ink-line);
+}
+
+.cart__totals-due dt {
+  font-family: var(--display);
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--paper);
+}
+
+.cart__totals-due dd {
+  font-size: 17px;
+}
+
+.cart__delivery {
+  margin: 10px 0 0;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.cart__actions {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart__order {
+  width: 100%;
+}
+
+.cart__order-alt {
+  padding: 4px 2px;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  color: var(--muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: color-mix(in srgb, var(--muted) 45%, transparent);
+  cursor: pointer;
+  transition:
+    color 200ms ease,
+    text-decoration-color 200ms ease;
+}
+
+.cart__order-alt:hover {
+  color: var(--paper);
+  text-decoration-color: currentColor;
+}
+
+.cart__copied {
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid var(--ink-line);
+  background: var(--ink);
+  font-size: 13px;
+}
+
+.cart__copied p {
+  margin: 0;
+}
+
+.cart__copied pre {
+  margin: 8px 0 0;
+  font-family: var(--mono);
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  color: var(--muted);
+}
+
+.cart__foot-links {
+  margin-top: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: var(--mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted-dim);
+}
+
+.cart__clear {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--muted-dim);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: color 200ms ease;
+}
+
+.cart__clear:hover {
+  color: var(--paper);
+}
+
+/* Add to cart, on the product page. Deliberately the quieter of the two
+   actions: a single piece is still ordered straight from the buy button. */
+.product__cart {
+  margin-top: 26px;
+}
+
+.product__add {
+  width: 100%;
+  padding: 14px 20px;
+  border-radius: 999px;
+  border: 1px solid var(--tint, var(--accent));
+  background: none;
+  font: inherit;
+  font-size: 13px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tint, var(--accent));
+  cursor: pointer;
+  transition:
+    background 200ms ease,
+    color 200ms ease,
+    border-color 200ms ease;
+}
+
+.product__add:hover:not(:disabled) {
+  background: color-mix(in srgb, var(--tint, var(--accent)) 14%, transparent);
+}
+
+.product__add:disabled {
+  border-color: var(--ink-line);
+  color: var(--muted-dim);
+  cursor: not-allowed;
+}
+
+.product__cart-note {
+  margin: 10px 0 0;
+  font-size: 12px;
+  line-height: 1.5;
+  text-align: center;
+  color: var(--muted-dim);
+}
+
+.product__cart-link {
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  color: var(--paper);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.product__cart-link:hover {
+  color: var(--accent);
+}
+
+/* The panel is full-bleed on a phone, where a 460px drawer would leave a
+   sliver of unusable page behind it. */
+@media (max-width: 520px) {
+  .cart__panel {
+    width: 100%;
+    border-left: 0;
+  }
+
+  .cart__line {
+    grid-template-columns: 60px 1fr auto;
+    gap: 12px;
+  }
+}

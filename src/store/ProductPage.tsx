@@ -14,6 +14,8 @@ import {
   type Size,
 } from '../constants/products'
 import {
+  BULK_PROMO_MIN,
+  BULK_PROMO_RATE,
   hasWhatsApp,
   INSTAGRAM_URL,
   orderChannel,
@@ -27,6 +29,7 @@ import { StoreShell } from './StoreShell'
 import { useProduct, useSwatch } from '../hooks/useCatalog'
 import { usePageView } from '../hooks/usePageView'
 import { itemFor, trackEvent } from '../lib/analytics'
+import { useCart } from './cart'
 
 export function ProductPage() {
   const { slug = '' } = useParams()
@@ -57,6 +60,10 @@ function ProductView({ slug }: { slug: string }) {
   const [size, setSize] = useState<Size | null>(null)
   const [quantity, setQuantity] = useState(1)
   const [copied, setCopied] = useState<boolean | null>(null)
+  // The selection that was last added, so the confirmation below the button
+  // is derived rather than cleared by hand every time a choice changes.
+  const [addedKey, setAddedKey] = useState<string | null>(null)
+  const { add, open: openCart } = useCart()
 
   usePageView(product ? `${product.name} · ${product.collection}` : 'Not found')
 
@@ -119,6 +126,25 @@ function ProductView({ slug }: { slug: string }) {
       items: [
         itemFor(product, { item_variant: `${color} / ${size}`, quantity }),
       ],
+    })
+  }
+
+  // What is selected right now. Comparing it to addedKey is what makes the
+  // confirmation disappear the moment the colour, size or quantity moves on.
+  const selectionKey = `${color}|${size}|${quantity}`
+  const added = addedKey === selectionKey
+
+  // Adding is silent — no drawer, no navigation — so several pieces can be
+  // picked up in a row. The nav badge is the confirmation, with a line of
+  // copy under the button for anyone who missed it.
+  const addToCart = () => {
+    if (!canOrder || !color || !size) return
+    add({ slug: product.slug, color, size, quantity })
+    setAddedKey(selectionKey)
+    trackEvent('add_to_cart', {
+      currency: CURRENCY,
+      value: product.price * quantity,
+      items: [itemFor(product, { item_variant: `${color} / ${size}`, quantity })],
     })
   }
 
@@ -294,6 +320,36 @@ function ProductView({ slug }: { slug: string }) {
                     )
                   }}
                 />
+              </div>
+            )}
+
+            {!soldOut && (
+              <div className="product__cart">
+                <button
+                  type="button"
+                  className="product__add"
+                  disabled={!canOrder}
+                  onClick={addToCart}
+                >
+                  {size ? 'Add to cart' : 'Select a size to add'}
+                </button>
+
+                <p className="product__cart-note" role="status">
+                  {added ? (
+                    <>
+                      Added.{' '}
+                      <button type="button" className="product__cart-link" onClick={openCart}>
+                        View cart
+                      </button>{' '}
+                      to order everything in one message.
+                    </>
+                  ) : (
+                    <>
+                      Buying a few? Add them up and order together — {BULK_PROMO_MIN} or more
+                      pieces takes an extra {Math.round(BULK_PROMO_RATE * 100)}% off.
+                    </>
+                  )}
+                </p>
               </div>
             )}
 

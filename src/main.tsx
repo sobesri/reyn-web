@@ -9,21 +9,24 @@ import { StoreIndex } from './store/StoreIndex.tsx'
 import { ScrollBehaviour } from './store/ScrollBehaviour.tsx'
 import { startAnalytics } from './lib/analytics.ts'
 import { StatsigAnalytics } from './lib/statsig.tsx'
+import { CartProvider } from './store/CartProvider.tsx'
 
 startAnalytics()
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <StatsigAnalytics>
-      <BrowserRouter>
-        <ScrollBehaviour />
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/store" element={<StoreIndex />} />
-          <Route path="/store/:slug" element={<ProductPage />} />
-          <Route path="*" element={<App />} />
-        </Routes>
-      </BrowserRouter>
+      <CartProvider>
+        <BrowserRouter>
+          <ScrollBehaviour />
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/store" element={<StoreIndex />} />
+            <Route path="/store/:slug" element={<ProductPage />} />
+            <Route path="*" element={<App />} />
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
     </StatsigAnalytics>
   </StrictMode>,
 )
