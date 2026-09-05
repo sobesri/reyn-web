@@ -65,7 +65,7 @@ export const LAUNCH_PRICE = 3299
 export const RRP = 3799
 
 /**
- * First stock plan: 29 designs, 171 units on hand (99 black, 72 white).
+ * First stock plan: 29 designs, 160 units on hand (89 black, 71 white).
  * Generated from the stock spreadsheet; quantities are units on hand.
  *
  * Cipher shipped a fourth design, Synapse, which was pulled over a print
@@ -81,7 +81,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['AU-H1', 'AU-H1-F', 'Hydra_black'] },
     stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
+      Black: { S: 1, M: 2, L: 1, XL: 1 },
     },
   },
   {
@@ -92,7 +92,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['AU-W1', 'AU-W1-F', 'Lupus_black'] },
     stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
+      Black: { S: 1, M: 2, L: 1, XL: 1 },
     },
   },
   {
@@ -115,7 +115,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['GS-MT1', 'GS-MT1-F', 'Medusa_black'] },
     stock: {
-      Black: { S: 0, M: 2, L: 2, XL: 1 },
+      Black: { S: 0, M: 2, L: 1, XL: 1 },
     },
   },
   {
@@ -148,7 +148,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { White: ['CX-GG1', 'CX-GG1-F', 'Glitch_God_white'] },
     stock: {
-      White: { S: 1, M: 2, L: 2, XL: 1 },
+      White: { S: 1, M: 2, L: 1, XL: 1 },
     },
   },
   {
@@ -184,7 +184,7 @@ export const products: Product[] = [
       White: ['HC-SR2', 'HC-SR2-F', 'Sir_Rendered_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
@@ -214,7 +214,7 @@ export const products: Product[] = [
       White: ['HC-BY2', 'HC-BY2-F', 'Busy_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
@@ -229,7 +229,7 @@ export const products: Product[] = [
       White: ['HC-EA2', 'HC-EA2-F', 'Emotionally_Available_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
@@ -244,7 +244,7 @@ export const products: Product[] = [
       White: ['HC-IP2', 'HC-IP2-F', 'Inner_Peace_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
@@ -259,7 +259,7 @@ export const products: Product[] = [
       White: ['UD-LS2', 'UD-LS2-F', 'Limitless_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
       White: { S: 1, M: 1, L: 0, XL: 0 },
     },
   },
@@ -402,7 +402,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['UD-HE', 'UD-HE-F', 'Hustle_black'] },
     stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
+      Black: { S: 1, M: 2, L: 1, XL: 1 },
     },
   },
   {
@@ -431,7 +431,7 @@ export const products: Product[] = [
       White: ['UD-CS2', 'UD-CS2-F', 'Chaos_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 2, XL: 0 },
       White: { S: 1, M: 2, L: 0, XL: 0 },
     },
   },
@@ -461,7 +461,7 @@ export const products: Product[] = [
       White: ['UD-LY2', 'UD-LY2-F', 'Loyalty_II_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 1, L: 1, XL: 0 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
