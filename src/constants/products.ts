@@ -103,7 +103,7 @@ export const products: Product[] = [
     compareAtPrice: RRP,
     images: { Black: ['AU-L2', 'AU-L2-F', 'Leo_black'], White: ['AU-L1', 'AU-L1-F', 'Leo_white'] },
     stock: {
-      Black: { S: 1, M: 1, L: 1, XL: 1 },
+      Black: { S: 1, M: 1, L: 1, XL: 0 },
       White: { S: 0, M: 1, L: 1, XL: 0 },
     },
   },
@@ -199,7 +199,7 @@ export const products: Product[] = [
       White: ['HC-WH1', 'HC-WH1-F', 'Wings_and_Horns_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 0, L: 1, XL: 0 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
@@ -289,7 +289,7 @@ export const products: Product[] = [
       White: ['UD-DP2', 'UD-DP2-F', 'Discipline_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 0, M: 0, L: 1, XL: 1 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
