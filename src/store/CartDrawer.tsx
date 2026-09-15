@@ -5,7 +5,7 @@
  * store nav.
  */
 
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { CURRENCY, formatPrice } from '../constants/products'
@@ -13,9 +13,6 @@ import {
   BULK_PROMO_MIN,
   BULK_PROMO_RATE,
   cartOrderMessage,
-  hasWhatsApp,
-  INSTAGRAM_URL,
-  orderChannel,
   qualifiesForBulkPromo,
   whatsappLink,
 } from '../constants/shop'
@@ -27,15 +24,12 @@ const PROMO_PERCENT = Math.round(BULK_PROMO_RATE * 100)
 
 export function CartDrawer() {
   const { isOpen } = useCart()
-  // The panel is mounted only while the cart is open, so the copy
-  // confirmation inside it belongs to one visit and not to the session.
   return isOpen ? <CartPanel /> : null
 }
 
 function CartPanel() {
   const { close, setQuantity, remove, clear } = useCart()
   const { items, totals, dropped } = useCartItems()
-  const [copied, setCopied] = useState<boolean | null>(null)
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -83,16 +77,6 @@ function CartPanel() {
         }),
       ),
     })
-  }
-
-  // Instagram cannot prefill a DM, so copy the details and open the profile.
-  // Both calls stay inside the click so the popup blocker allows the tab.
-  function orderViaInstagram() {
-    trackOrder('Instagram')
-    const copying = navigator.clipboard?.writeText(message)
-    window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')
-    if (copying) copying.then(() => setCopied(true)).catch(() => setCopied(false))
-    else setCopied(false)
   }
 
   const shortOfPromo = BULK_PROMO_MIN - totals.units
@@ -246,46 +230,22 @@ function CartPanel() {
             <p className="cart__delivery">Delivery quoted when the order is confirmed.</p>
 
             <div className="cart__actions">
-              {hasWhatsApp ? (
-                <>
-                  <a
-                    className="btn btn--solid cart__order"
-                    href={canOrder ? whatsappLink(message) : undefined}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackOrder('WhatsApp')}
-                  >
-                    Order all on WhatsApp
-                  </a>
-                  <button type="button" className="cart__order-alt" onClick={orderViaInstagram}>
-                    Order all on Instagram
-                  </button>
-                </>
-              ) : (
-                <button type="button" className="btn btn--solid cart__order" onClick={orderViaInstagram}>
-                  Order all on Instagram
-                </button>
-              )}
+              <a
+                className="btn btn--solid cart__order"
+                href={canOrder ? whatsappLink(message) : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={() => trackOrder('WhatsApp')}
+              >
+                Order all on WhatsApp
+              </a>
             </div>
-
-            {copied !== null && (
-              <div className="cart__copied" role="status">
-                {copied ? (
-                  <p>Order details copied. Paste them into the DM and send.</p>
-                ) : (
-                  <>
-                    <p>Copy these details into the DM:</p>
-                    <pre>{message}</pre>
-                  </>
-                )}
-              </div>
-            )}
 
             <div className="cart__foot-links">
               <button type="button" className="cart__clear" onClick={clear}>
                 Empty cart
               </button>
-              <span>Confirmed over {orderChannel}</span>
+              <span>Confirmed over WhatsApp</span>
             </div>
           </footer>
         )}

@@ -16,9 +16,6 @@ import {
 import {
   BULK_PROMO_MIN,
   BULK_PROMO_RATE,
-  hasWhatsApp,
-  INSTAGRAM_URL,
-  orderChannel,
   orderMessage,
   whatsappLink,
 } from '../constants/shop'
@@ -59,7 +56,6 @@ function ProductView({ slug }: { slug: string }) {
   const [activeImage, setActiveImage] = useState(0)
   const [size, setSize] = useState<Size | null>(null)
   const [quantity, setQuantity] = useState(1)
-  const [copied, setCopied] = useState<boolean | null>(null)
   // The selection that was last added, so the confirmation below the button
   // is derived rather than cleared by hand every time a choice changes.
   const [addedKey, setAddedKey] = useState<string | null>(null)
@@ -146,16 +142,6 @@ function ProductView({ slug }: { slug: string }) {
       value: product.price * quantity,
       items: [itemFor(product, { item_variant: `${color} / ${size}`, quantity })],
     })
-  }
-
-  // Instagram cannot prefill a DM, so copy the details and open the profile.
-  // Both calls stay inside the click so the popup blocker allows the tab.
-  function orderViaInstagram() {
-    trackOrder('Instagram')
-    const copying = navigator.clipboard?.writeText(message)
-    window.open(INSTAGRAM_URL, '_blank', 'noopener,noreferrer')
-    if (copying) copying.then(() => setCopied(true)).catch(() => setCopied(false))
-    else setCopied(false)
   }
 
   return (
@@ -354,62 +340,26 @@ function ProductView({ slug }: { slug: string }) {
             )}
 
             <div className="product__order">
-              {hasWhatsApp ? (
-                <>
-                  <a
-                    className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
-                    href={canOrder ? whatsappLink(message) : undefined}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-disabled={!canOrder}
-                    onClick={(e) => {
-                      if (!canOrder) {
-                        e.preventDefault()
-                        return
-                      }
-                      trackOrder('WhatsApp')
-                    }}
-                  >
-                    {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}
-                  </a>
-
-                  {/* Secondary channel: the same order, sent as an Instagram DM. */}
-                  <button
-                    type="button"
-                    className="product__buy-alt"
-                    disabled={!canOrder}
-                    onClick={orderViaInstagram}
-                  >
-                    Order on Instagram
-                  </button>
-                </>
-              ) : (
-                <button
-                  type="button"
-                  className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
-                  disabled={!canOrder}
-                  onClick={orderViaInstagram}
-                >
-                  {soldOut ? 'Sold out' : size ? 'Order on Instagram' : 'Select a size'}
-                </button>
-              )}
+              <a
+                className={`btn btn--solid product__buy${canOrder ? '' : ' is-disabled'}`}
+                href={canOrder ? whatsappLink(message) : undefined}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-disabled={!canOrder}
+                onClick={(e) => {
+                  if (!canOrder) {
+                    e.preventDefault()
+                    return
+                  }
+                  trackOrder('WhatsApp')
+                }}
+              >
+                {soldOut ? 'Sold out' : size ? 'Order on WhatsApp' : 'Select a size'}
+              </a>
             </div>
 
-            {copied !== null && (
-              <div className="product__copied" role="status">
-                {copied ? (
-                  <p>Order details copied. Paste them into the DM and send.</p>
-                ) : (
-                  <>
-                    <p>Copy these details into the DM:</p>
-                    <pre>{message}</pre>
-                  </>
-                )}
-              </div>
-            )}
-
             <p className="product__note">
-              Orders are confirmed over {orderChannel}. Island-wide delivery from Colombo.{' '}
+              Orders are confirmed over WhatsApp. Island-wide delivery from Colombo.{' '}
               <HowToOrder />
             </p>
           </div>

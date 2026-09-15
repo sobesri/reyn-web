@@ -1,21 +1,14 @@
 /**
  * Order routing.
  *
- * WhatsApp supports prefilled text via wa.me, so an order arrives fully
- * written. Instagram has no public equivalent: there is no supported way to
- * prefill a DM from a link. For Instagram we copy the details to the
- * clipboard and open the profile, so the customer only has to paste.
+ * Every order goes out over WhatsApp: wa.me accepts prefilled text, so the
+ * order arrives fully written and the customer only has to hit send.
  *
  * Set VITE_WHATSAPP_NUMBER in .env, digits only with country code,
- * e.g. 94771234567.
+ * e.g. 94771234567. Without it wa.me opens a contact picker rather than our
+ * chat, so it must also be set wherever the site is built (Vercel).
  */
 export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER ?? ''
-
-export const INSTAGRAM_URL = 'https://www.instagram.com/reynatelierofficial'
-
-export const hasWhatsApp = WHATSAPP_NUMBER.length > 0
-
-export const orderChannel = hasWhatsApp ? 'WhatsApp' : 'Instagram'
 
 type OrderDetails = {
   productName: string
@@ -25,7 +18,7 @@ type OrderDetails = {
   quantity: number
 }
 
-/** The message a customer sends, used for both channels. */
+/** The message a customer sends. */
 export function orderMessage({ productName, collection, color, size, quantity }: OrderDetails) {
   return [
     'Hi, I would like to order:',
@@ -47,8 +40,8 @@ export function whatsappLink(message: string) {
  * pieces, so five of one design qualifies exactly like five different ones.
  *
  * The discount is quoted in the cart and written into the order message, but
- * it is applied by hand when the order is confirmed over WhatsApp or
- * Instagram — there is no checkout here to apply it for us.
+ * it is applied by hand when the order is confirmed over WhatsApp — there is
+ * no checkout here to apply it for us.
  */
 export const BULK_PROMO_MIN = 5
 export const BULK_PROMO_RATE = 0.05
@@ -82,8 +75,8 @@ export type CartOrderLine = {
 }
 
 /**
- * One message covering a whole cart. Same two channels as a single order:
- * prefilled for WhatsApp, copied to the clipboard for Instagram.
+ * One message covering a whole cart, prefilled into WhatsApp the same way as
+ * a single order.
  */
 export function cartOrderMessage(
   lines: CartOrderLine[],

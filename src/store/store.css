@@ -485,7 +485,6 @@
   opacity: 0.5;
 }
 
-/* Primary channel plus a quieter link to the other one. */
 .product__order {
   margin-top: 26px;
   display: flex;
@@ -496,38 +495,6 @@
 
 .product__buy {
   width: 100%;
-}
-
-.product__buy-alt {
-  padding: 4px 2px;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-size: 13px;
-  letter-spacing: 0.01em;
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: color-mix(in srgb, var(--muted) 45%, transparent);
-  cursor: pointer;
-  transition:
-    color 200ms ease,
-    text-decoration-color 200ms ease;
-}
-
-.product__buy-alt:hover {
-  color: var(--paper);
-  text-decoration-color: currentColor;
-}
-
-.product__buy-alt:disabled {
-  color: var(--muted-dim);
-  text-decoration-color: transparent;
-  cursor: not-allowed;
-}
-
-.product__buy-alt:disabled:hover {
-  color: var(--muted-dim);
 }
 
 .product__buy.is-disabled {
@@ -716,44 +683,6 @@
     position: sticky;
     left: 0;
   }
-}
-
-/* Order details shown after copying, for the Instagram flow */
-.product__copied {
-  margin-top: 14px;
-  padding: 14px 16px;
-  border: 1px solid color-mix(in srgb, var(--tint, var(--accent)) 40%, transparent);
-  border-radius: calc(var(--radius) - 6px);
-  background: color-mix(in srgb, var(--tint, var(--accent)) 8%, transparent);
-  font-size: 13.5px;
-  color: var(--paper);
-}
-
-.product__copied pre {
-  margin: 10px 0 0;
-  padding: 12px;
-  border-radius: 8px;
-  background: rgba(8, 8, 10, 0.6);
-  font-family: var(--mono);
-  font-size: 12px;
-  line-height: 1.6;
-  color: var(--muted);
-  white-space: pre-wrap;
-  word-break: break-word;
-  user-select: all;
-}
-
-/* A disabled <button> needs the same treatment the anchor variant gets */
-.product__buy:disabled {
-  background: var(--ink-raised);
-  color: var(--muted-dim);
-  border: 1px solid var(--ink-line);
-  cursor: not-allowed;
-}
-
-.product__buy:disabled:hover {
-  transform: none;
-  background: var(--ink-raised);
 }
 
 /* ==========================================================================
@@ -1263,49 +1192,6 @@
 
 .cart__order {
   width: 100%;
-}
-
-.cart__order-alt {
-  padding: 4px 2px;
-  border: 0;
-  background: none;
-  font: inherit;
-  font-size: 13px;
-  color: var(--muted);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  text-decoration-color: color-mix(in srgb, var(--muted) 45%, transparent);
-  cursor: pointer;
-  transition:
-    color 200ms ease,
-    text-decoration-color 200ms ease;
-}
-
-.cart__order-alt:hover {
-  color: var(--paper);
-  text-decoration-color: currentColor;
-}
-
-.cart__copied {
-  margin-top: 16px;
-  padding: 12px 14px;
-  border-radius: 12px;
-  border: 1px solid var(--ink-line);
-  background: var(--ink);
-  font-size: 13px;
-}
-
-.cart__copied p {
-  margin: 0;
-}
-
-.cart__copied pre {
-  margin: 8px 0 0;
-  font-family: var(--mono);
-  font-size: 11px;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  color: var(--muted);
 }
 
 .cart__foot-links {

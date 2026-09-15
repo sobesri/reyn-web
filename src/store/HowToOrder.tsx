@@ -1,29 +1,15 @@
 import { useState } from 'react'
 import { Modal } from '../components/Modal'
-import { hasWhatsApp, INSTAGRAM_URL, orderChannel } from '../constants/shop'
 
-const HANDLE = '@reynatelierofficial'
-
-/** Steps differ by channel: WhatsApp prefills, Instagram needs a paste. */
-const steps = hasWhatsApp
-  ? [
-      { title: 'Pick your colour', body: 'Black or white, whichever is in stock for this piece.' },
-      { title: 'Choose your size', body: 'S to XL. Sizes we are out of are greyed out.' },
-      { title: 'Set the quantity', body: 'Capped at the number we actually have on hand.' },
-      {
-        title: 'Tap "Order on WhatsApp"',
-        body: `Your order opens as a ready-written message. Just hit send and we will confirm. Prefer Instagram? Use the link under the button and we will copy the details for you to paste to ${HANDLE}.`,
-      },
-    ]
-  : [
-      { title: 'Pick your colour', body: 'Black or white, whichever is in stock for this piece.' },
-      { title: 'Choose your size', body: 'S to XL. Sizes we are out of are greyed out.' },
-      { title: 'Set the quantity', body: 'Capped at the number we actually have on hand.' },
-      {
-        title: 'Tap "Order on Instagram"',
-        body: `Your order details are copied to your clipboard automatically. Paste them into a message to ${HANDLE} and we will confirm.`,
-      },
-    ]
+const steps = [
+  { title: 'Pick your colour', body: 'Black or white, whichever is in stock for this piece.' },
+  { title: 'Choose your size', body: 'S to XL. Sizes we are out of are greyed out.' },
+  { title: 'Set the quantity', body: 'Capped at the number we actually have on hand.' },
+  {
+    title: 'Tap "Order on WhatsApp"',
+    body: 'Your order opens as a ready-written message. Just hit send and we will confirm.',
+  },
+]
 
 export function HowToOrder() {
   const [open, setOpen] = useState(false)
@@ -47,26 +33,9 @@ export function HowToOrder() {
           ))}
         </ol>
 
-        {!hasWhatsApp && (
-          <p className="modal__foot">
-            Message us at{' '}
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              {HANDLE}
-            </a>
-            . If your browser blocks the copy, we show the details on screen so you can copy them by
-            hand.
-          </p>
-        )}
-
-        {hasWhatsApp && (
-          <p className="modal__foot">
-            Orders are confirmed over {orderChannel} or{' '}
-            <a href={INSTAGRAM_URL} target="_blank" rel="noopener noreferrer">
-              {HANDLE}
-            </a>
-            , then shipped island-wide from Colombo.
-          </p>
-        )}
+        <p className="modal__foot">
+          Orders are confirmed over WhatsApp, then shipped island-wide from Colombo.
+        </p>
       </Modal>
     </>
   )

@@ -1,4 +1,3 @@
-import { orderChannel } from '../constants/shop'
 import { useCatalogSummary } from '../hooks/useDesignCount'
 
 // Written from the live catalogue so a new colourway or a retired piece does
@@ -14,7 +13,7 @@ const stepsFor = (designs: string, colors: string, sizeRange: string) => [
   },
   {
     label: 'Order and we ship',
-    note: `Confirm over ${orderChannel}. Island-wide delivery from Colombo.`,
+    note: 'Confirm over WhatsApp. Island-wide delivery from Colombo.',
   },
 ]
 
