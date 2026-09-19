@@ -159,19 +159,19 @@ export const products: Product[] = [
       Black: { S: 1, M: 2, L: 2, XL: 1 },
     },
   },
-  {
-    slug: 'cipher-synapse',
-    name: 'Synapse',
-    collection: 'Cipher',
-    price: LAUNCH_PRICE,
-    compareAtPrice: RRP,
-    // No SKU-prefixed shots on file for this one yet, so the original
-    // Cloudinary id is the only candidate.
-    images: { Black: ['Synapse_black'] },
-    stock: {
-      Black: { S: 1, M: 2, L: 2, XL: 1 },
-    },
-  },
+  // {
+  //   slug: 'cipher-synapse',
+  //   name: 'Synapse',
+  //   collection: 'Cipher',
+  //   price: LAUNCH_PRICE,
+  //   compareAtPrice: RRP,
+  //   // No SKU-prefixed shots on file for this one yet, so the original
+  //   // Cloudinary id is the only candidate.
+  //   images: { Black: ['Synapse_black'] },
+  //   stock: {
+  //     Black: { S: 1, M: 2, L: 2, XL: 1 },
+  //   },
+  // },
   {
     slug: 'havoc-screen',
     name: 'Julius Online',
