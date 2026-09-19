@@ -65,12 +65,9 @@ export const LAUNCH_PRICE = 3299
 export const RRP = 3799
 
 /**
- * First stock plan: 29 designs, 160 units on hand (89 black, 71 white).
+ * 30 designs, 159 units on hand (90 black, 69 white): the full count of 179
+
  * Generated from the stock spreadsheet; quantities are units on hand.
- *
- * Cipher shipped a fourth design, Synapse, which was pulled over a print
- * fault. It is gone from this list, and `hidden` in the Statsig catalogue
- * pulls it from any build still carrying it.
  */
 export const products: Product[] = [
   {
@@ -163,6 +160,19 @@ export const products: Product[] = [
     },
   },
   {
+    slug: 'cipher-synapse',
+    name: 'Synapse',
+    collection: 'Cipher',
+    price: LAUNCH_PRICE,
+    compareAtPrice: RRP,
+    // No SKU-prefixed shots on file for this one yet, so the original
+    // Cloudinary id is the only candidate.
+    images: { Black: ['Synapse_black'] },
+    stock: {
+      Black: { S: 1, M: 2, L: 2, XL: 1 },
+    },
+  },
+  {
     slug: 'havoc-screen',
     name: 'Julius Online',
     collection: 'Havoc',
@@ -200,7 +210,7 @@ export const products: Product[] = [
     },
     stock: {
       Black: { S: 0, M: 0, L: 1, XL: 0 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      White: { S: 1, M: 1, L: 0, XL: 0 },
     },
   },
   {
@@ -334,8 +344,8 @@ export const products: Product[] = [
       White: ['UD-BF2', 'UD-BF2-F', 'Broken_Pink_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
-      White: { S: 1, M: 1, L: 1, XL: 0 },
+      Black: { S: 0, M: 1, L: 0, XL: 1 },
+      White: { S: 0, M: 1, L: 1, XL: 0 },
     },
   },
   {
@@ -461,7 +471,7 @@ export const products: Product[] = [
       White: ['UD-LY2', 'UD-LY2-F', 'Loyalty_II_white'],
     },
     stock: {
-      Black: { S: 0, M: 0, L: 1, XL: 0 },
+      Black: { S: 0, M: 1, L: 1, XL: 0 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
