@@ -416,7 +416,7 @@ export const products: Product[] = [
       White: ['UD-FM2', 'UD-FM2-F', 'Freedom_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 1 },
+      Black: { S: 1, M: 1, L: 1, XL: 0 },
       White: { S: 1, M: 2, L: 0, XL: 0 },
     },
   },
@@ -461,7 +461,7 @@ export const products: Product[] = [
       White: ['UD-LY2', 'UD-LY2-F', 'Loyalty_II_white'],
     },
     stock: {
-      Black: { S: 0, M: 1, L: 1, XL: 0 },
+      Black: { S: 0, M: 0, L: 1, XL: 0 },
       White: { S: 1, M: 1, L: 1, XL: 0 },
     },
   },
