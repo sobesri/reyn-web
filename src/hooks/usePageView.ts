@@ -19,9 +19,11 @@ function setUrlTag(selector: string, attribute: string, url: string) {
  * from a shared listener higher up the tree would run before the page had a
  * chance to name itself, and every product would report as "Reyn Atelier".
  */
-export function usePageView(title: string) {
+export function usePageView(title: string, { exact = false } = {}) {
   const { pathname, search } = useLocation()
-  const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} · ${SITE_NAME}`
+  // `exact` is for a route that spells its own tab title out in full; every
+  // other route gets the site name appended.
+  const fullTitle = exact || title === SITE_NAME ? title : `${title} · ${SITE_NAME}`
 
   useEffect(() => {
     document.title = fullTitle

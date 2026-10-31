@@ -6,20 +6,39 @@
   <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="apple-touch-icon" href="/favicon.png" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#08080a" />
-  <title>Reyn Atelier</title>
+  <meta name="theme-color" content="#faf9f6" />
+
+  <!--
+    Resolve the theme before first paint. Light is the default; a visitor who
+    has toggled to black gets it straight away instead of a white flash.
+    Kept in sync with src/hooks/useTheme.tsx.
+  -->
+  <script>
+    (function () {
+      var theme = 'light'
+      try {
+        var saved = localStorage.getItem('reyn-theme')
+        if (saved === 'light' || saved === 'dark') theme = saved
+      } catch (e) { /* blocked storage: stay on the default */ }
+      document.documentElement.dataset.theme = theme
+      document.documentElement.style.colorScheme = theme
+      var meta = document.querySelector('meta[name="theme-color"]')
+      if (meta) meta.setAttribute('content', theme === 'dark' ? '#08080a' : '#faf9f6')
+    })()
+  </script>
+  <title>Reyn Atelier - Store</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Space+Grotesk:wght@400;500;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
   <!-- SEO -->
   <meta name="description"
     content="Shop Reyn Atelier - premium oversized tees from Colombo, shipping island-wide. One vision, five worlds: Aurum, Cipher, Genesis, Havoc, Untamed. Redefine the standard." />
   <meta name="robots" content="index, follow" />
-  <!-- Default for the landing page. usePageView rewrites both per route. -->
+  <!-- Default for the store home. usePageView rewrites both per route. -->
   <link rel="canonical" href="https://www.reynatelier.com/" />
 
   <!-- Open Graph (social sharing) -->

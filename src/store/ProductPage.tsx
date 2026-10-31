@@ -1,6 +1,5 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { Link, useLocation, useNavigate, useParams } from 'react-router-dom'
-import { collections } from '../constants/collections'
 import {
   availableColors,
   CURRENCY,
@@ -24,6 +23,7 @@ import { SizeGuideButton } from './SizeGuideButton'
 import { StoreImage } from './StoreImage'
 import { StoreShell } from './StoreShell'
 import { useProduct, useSwatch } from '../hooks/useCatalog'
+import { useTint } from '../hooks/useTint'
 import { usePageView } from '../hooks/usePageView'
 import { itemFor, trackEvent } from '../lib/analytics'
 import { useCart } from './cart'
@@ -38,13 +38,14 @@ export function ProductPage() {
 function ProductView({ slug }: { slug: string }) {
   const product = useProduct(slug)
   const swatch = useSwatch()
+  const tintFor = useTint()
   const navigate = useNavigate()
   const location = useLocation()
 
   // 'default' means this was the first entry, so there is nothing to go back to.
   const close = () => {
     if (location.key !== 'default') navigate(-1)
-    else navigate('/store')
+    else navigate('/')
   }
 
   const inStockColors = product ? availableColors(product) : []
@@ -81,7 +82,7 @@ function ProductView({ slug }: { slug: string }) {
           <p className="section__lede">
             It may have sold out and been retired. Everything still available is in the store.
           </p>
-          <Link className="btn btn--solid" to="/store">
+          <Link className="btn btn--solid" to="/">
             Back to the store
           </Link>
         </section>
@@ -89,7 +90,7 @@ function ProductView({ slug }: { slug: string }) {
     )
   }
 
-  const tint = collections.find((c) => c.name === product.collection)?.accent ?? 'var(--accent)'
+  const tint = tintFor(product.collection)
   const soldOut = isSoldOut(product)
   const colorways = offeredColors(product)
   const gallery = (color && product.images[color]) || []
@@ -149,7 +150,7 @@ function ProductView({ slug }: { slug: string }) {
       <section className="section product" style={{ '--tint': tint } as CSSProperties}>
         <div className="product__topbar">
           <nav className="product__crumbs" aria-label="Breadcrumb">
-            <Link to="/store">Store</Link>
+            <Link to="/">Store</Link>
             <span aria-hidden="true">/</span>
             <span>{product.collection}</span>
           </nav>

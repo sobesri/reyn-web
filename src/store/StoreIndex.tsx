@@ -1,24 +1,14 @@
 import { useMemo, type CSSProperties } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { collections, type CollectionName } from '../constants/collections'
-import {
-  availableColors,
-  coverImages,
-  formatPrice,
-  isSoldOut,
-  offeredColors,
-  sizesInStock,
-} from '../constants/products'
-import { StoreImage } from './StoreImage'
+import { FeaturedDeck } from './FeaturedDeck'
+import { ProductCard } from './ProductCard'
 import { StoreShell } from './StoreShell'
-import { useCatalog, useSwatch } from '../hooks/useCatalog'
+import { useCatalog } from '../hooks/useCatalog'
+import { useTint } from '../hooks/useTint'
 import { usePageView } from '../hooks/usePageView'
-import { itemFor, trackEvent } from '../lib/analytics'
 
 type Filter = CollectionName | 'All'
-
-const tintFor = (name: CollectionName) =>
-  collections.find((c) => c.name === name)?.accent ?? 'var(--accent)'
 
 const isCollection = (value: string): value is CollectionName =>
   collections.some((c) => c.name === value)
@@ -38,12 +28,12 @@ export function StoreIndex() {
     else setParams({ collection: next }, { replace: true })
   }
 
-  usePageView('Store')
+  usePageView('Reyn Atelier - Store', { exact: true })
 
   // Statsig can correct stock and pricing here between deploys; the bundled
   // catalogue is what renders until it does.
   const catalog = useCatalog()
-  const swatch = useSwatch()
+  const tintFor = useTint()
 
   const visible = useMemo(
     () => (filter === 'All' ? catalog : catalog.filter((p) => p.collection === filter)),
@@ -52,20 +42,15 @@ export function StoreIndex() {
 
   return (
     <StoreShell>
-      <section className="section store-head">
-        <div className="section__head">
-          <div>
-            <p className="eyebrow">The store</p>
-            <h1 className="section__title">Wear your world.</h1>
-          </div>
-          <p className="section__note store-head__note">
-            Every piece is a 240GSM oversized tee with a dropped shoulder, cut the same way across
-            all five worlds. Limited runs, so when a size is gone it is gone.
-          </p>
-        </div>
-      </section>
+      <h1 className="sr-only">Reyn Atelier — Store</h1>
 
-      <section className="section store-list">
+      <FeaturedDeck />
+
+      <section className="section store-list" aria-labelledby="browse-title">
+        <h2 className="section__title store-list__title" id="browse-title">
+          Browse our collection
+        </h2>
+
         <div className="store-filters" role="group" aria-label="Filter by collection">
           {(['All', ...collections.map((c) => c.name)] as Filter[]).map((option) => (
             <button
@@ -85,65 +70,22 @@ export function StoreIndex() {
           <p className="store-empty">Nothing in this world yet. Check back soon.</p>
         ) : (
           <ul className="store-grid">
-            {visible.map((product) => {
-              const soldOut = isSoldOut(product)
-              const colorsLeft = availableColors(product)
-              const colorways = offeredColors(product)
-              const sizesLeft = sizesInStock(product)
-
-              return (
-                <li
-                  className="product-card"
-                  key={product.slug}
-                  style={{ '--tint': tintFor(product.collection) } as CSSProperties}
-                >
-                  <Link
-                    to={`/store/${product.slug}`}
-                    onClick={() =>
-                      trackEvent('select_item', {
-                        item_list_name: `Store · ${filter}`,
-                        items: [itemFor(product)],
-                      })
-                    }
-                  >
-                    <div className="product-card__media">
-                      <StoreImage
-                        publicId={coverImages(product)}
-                        alt={product.name}
-                        label={product.name}
-                      />
-                      <span className="product-card__collection">{product.collection}</span>
-                      {soldOut && <span className="product-card__flag">Sold out</span>}
-                    </div>
-
-                    <div className="product-card__body">
-                      <h2 className="product-card__name">{product.name}</h2>
-                      <p className="product-card__price">
-                        {formatPrice(product.price)}
-                        {product.compareAtPrice && (
-                          <s className="product-card__was">{formatPrice(product.compareAtPrice)}</s>
-                        )}
-                      </p>
-                      <p className="product-card__sizes">
-                        {soldOut ? 'Restocking soon' : sizesLeft.join(' · ')}
-                      </p>
-
-                      <ul className="product-card__swatches" aria-hidden="true">
-                        {colorways.map((colorway) => (
-                          <li
-                            key={colorway}
-                            className={colorsLeft.includes(colorway) ? '' : 'is-out'}
-                            style={{ '--swatch': swatch(colorway) } as CSSProperties}
-                          />
-                        ))}
-                      </ul>
-                    </div>
-                  </Link>
-                </li>
-              )
-            })}
+            {visible.map((product) => (
+              <ProductCard
+                key={product.slug}
+                product={product}
+                listName={`Store · ${filter}`}
+              />
+            ))}
           </ul>
         )}
+      </section>
+
+      <section className="section store-note">
+        <p className="store-note__text">
+          Every piece is a 240GSM oversized tee with a dropped shoulder, cut the same way across
+          all five worlds. Limited runs, so when a size is gone it is gone.
+        </p>
       </section>
     </StoreShell>
   )

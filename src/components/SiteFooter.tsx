@@ -15,7 +15,7 @@ export function SiteFooter() {
               <img src={reynLogo} alt="REYN." className="footer__logo" />
             </span>
             <p className="footer__tag">Redefine the Standard · Colombo, Sri Lanka</p>
-            <Link className="footer__store-link" to="/store">
+            <Link className="footer__store-link" to="/">
               Shop the store →
             </Link>
           </div>

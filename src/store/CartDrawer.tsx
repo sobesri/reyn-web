@@ -135,7 +135,7 @@ function CartPanel() {
         {items.length === 0 ? (
           <div className="cart__empty">
             <p>Add a few pieces and order them together in one message.</p>
-            <Link className="btn btn--solid" to="/store" onClick={close}>
+            <Link className="btn btn--solid" to="/" onClick={close}>
               Browse the store
             </Link>
           </div>

@@ -7,6 +7,7 @@ import { Ordering } from './components/Ordering'
 import { Marquee } from './components/Marquee'
 import { ScrollToTop } from './components/ScrollToTop'
 import { SiteFooter } from './components/SiteFooter'
+import { SiteNav } from './components/SiteNav'
 import { StoreFab } from './components/StoreFab'
 import { SizeChart } from './components/SizeChart'
 import { collectionTags } from './constants/collections'
@@ -62,12 +63,14 @@ function TagCloud() {
 function App() {
   useReveal()
   usePointerGlow()
-  usePageView('Reyn Atelier')
+  usePageView('About us')
 
   return (
     <div className="site">
       <div className="grain" aria-hidden="true" />
       <div className="spotlight" aria-hidden="true" />
+
+      <SiteNav />
 
       <main>
         <Hero />

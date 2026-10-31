@@ -1,0 +1,97 @@
+file_name,cloudinary_public_id,collection,design_name,product_slug,color,view,image_order,notes
+AU-H1.png,AU-H1,Aurum,Hydra,aurum-hydra,Black,Back,1,
+AU-H1-F.png,AU-H1-F,Aurum,Hydra,aurum-hydra,Black,Front,2,
+AU-L2.png,AU-L2,Aurum,Leo,aurum-lion,Black,Back,1,
+AU-L2-F.png,AU-L2-F,Aurum,Leo,aurum-lion,Black,Front,2,
+AU-L1.png,AU-L1,Aurum,Leo,aurum-lion,White,Back,1,
+AU-L1-F.png,AU-L1-F,Aurum,Leo,aurum-lion,White,Front,2,
+AU-W1.png,AU-W1,Aurum,Lupus,aurum-wolf,Black,Back,1,code W = Wolf
+AU-W1-F.png,AU-W1-F,Aurum,Lupus,aurum-wolf,Black,Front,2,code W = Wolf
+CX-GG1.png,CX-GG1,Cipher,Glitch God,cipher-glitch-god,White,Back,1,
+CX-GG1-F.png,CX-GG1-F,Cipher,Glitch God,cipher-glitch-god,White,Front,2,
+CX-OR1.png,CX-OR1,Cipher,Override,cipher-over-ride,Black,Back,1,
+CX-OR1-F.png,CX-OR1-F,Cipher,Override,cipher-over-ride,Black,Front,2,
+GS-AC1.png,GS-AC1,Genesis,Angel City,genesis-angel-city,White,Back,1,
+GS-AC1-F.png,GS-AC1-F,Genesis,Angel City,genesis-angel-city,White,Front,2,
+GS-MT1.png,GS-MT1,Genesis,Medusa,genesis-medusa,Black,Back,1,verified: Medusa chest print
+GS-MT1-F.png,GS-MT1-F,Genesis,Medusa,genesis-medusa,Black,Front,2,verified: Medusa chest print
+GS-SO1.png,GS-SO1,Genesis,Susanoo,genesis-susanoo,Black,Back,1,
+GS-SO1-F.png,GS-SO1-F,Genesis,Susanoo,genesis-susanoo,Black,Front,2,
+HC-BY1.png,HC-BY1,Havoc,Busy?,havoc-busy,Black,Back,1,
+HC-BY1-F.png,HC-BY1-F,Havoc,Busy?,havoc-busy,Black,Front,2,
+HC-BY2.png,HC-BY2,Havoc,Busy?,havoc-busy,White,Back,1,
+HC-BY2-F.png,HC-BY2-F,Havoc,Busy?,havoc-busy,White,Front,2,
+HC-EA1.png,HC-EA1,Havoc,Emotionally Available,havoc-emotional,Black,Back,1,
+HC-EA1-F.png,HC-EA1-F,Havoc,Emotionally Available,havoc-emotional,Black,Front,2,
+HC-EA2.png,HC-EA2,Havoc,Emotionally Available,havoc-emotional,White,Back,1,
+HC-EA2-F.png,HC-EA2-F,Havoc,Emotionally Available,havoc-emotional,White,Front,2,
+HC-IP1.png,HC-IP1,Havoc,Inner Peace,havoc-inner-peace,Black,Back,1,
+HC-IP1-F.png,HC-IP1-F,Havoc,Inner Peace,havoc-inner-peace,Black,Front,2,
+HC-IP2.png,HC-IP2,Havoc,Inner Peace,havoc-inner-peace,White,Back,1,
+HC-IP2-F.png,HC-IP2-F,Havoc,Inner Peace,havoc-inner-peace,White,Front,2,
+HC-JC1.png,HC-JC1,Havoc,Julius Online,havoc-screen,White,Back,1,
+HC-JC1-F.png,HC-JC1-F,Havoc,Julius Online,havoc-screen,White,Front,2,
+HC-SR1.png,HC-SR1,Havoc,Sir Rendered,havoc-knight,Black,Back,1,
+HC-SR1-F.png,HC-SR1-F,Havoc,Sir Rendered,havoc-knight,Black,Front,2,
+HC-SR2.png,HC-SR2,Havoc,Sir Rendered,havoc-knight,White,Back,1,
+HC-SR2-F.png,HC-SR2-F,Havoc,Sir Rendered,havoc-knight,White,Front,2,
+HC-WH2.png,HC-WH2,Havoc,Wings and Horns,havoc-angel,Black,Back,1,
+HC-WH2-F.png,HC-WH2-F,Havoc,Wings and Horns,havoc-angel,Black,Front,2,
+HC-WH1.png,HC-WH1,Havoc,Wings and Horns,havoc-angel,White,Back,1,
+HC-WH1-F.png,HC-WH1-F,Havoc,Wings and Horns,havoc-angel,White,Front,2,
+UD-BT1.png,UD-BT1,Untamed,Beast,untamed-beast,Black,Back,1,verified: yellow BEAST graffiti
+UD-BT1-F.png,UD-BT1-F,Untamed,Beast,untamed-beast,Black,Front,2,verified: yellow BEAST graffiti
+UD-BT2.png,UD-BT2,Untamed,Beast,untamed-beast,White,Back,1,verified: yellow BEAST graffiti
+UD-BT2-F.png,UD-BT2-F,Untamed,Beast,untamed-beast,White,Front,2,verified: yellow BEAST graffiti
+UD-BM1.png,UD-BM1,Untamed,Broken - Orange,untamed-broken-orange,Black,Back,1,"CHECK: print reads red/crimson, not orange"
+UD-BM1-F.png,UD-BM1-F,Untamed,Broken - Orange,untamed-broken-orange,Black,Front,2,"CHECK: print reads red/crimson, not orange"
+UD-BM2.png,UD-BM2,Untamed,Broken - Orange,untamed-broken-orange,White,Back,1,"CHECK: print reads red/crimson, not orange"
+UD-BM2-F.png,UD-BM2-F,Untamed,Broken - Orange,untamed-broken-orange,White,Front,2,"CHECK: print reads red/crimson, not orange"
+UD-BF1.png,UD-BF1,Untamed,Broken - Pink,untamed-broken-pink,Black,Back,1,verified: pink BROKEN graffiti
+UD-BF1-F.png,UD-BF1-F,Untamed,Broken - Pink,untamed-broken-pink,Black,Front,2,verified: pink BROKEN graffiti
+UD-BF2.png,UD-BF2,Untamed,Broken - Pink,untamed-broken-pink,White,Back,1,verified: pink BROKEN graffiti
+UD-BF2-F.png,UD-BF2-F,Untamed,Broken - Pink,untamed-broken-pink,White,Front,2,verified: pink BROKEN graffiti
+UD-CS1.png,UD-CS1,Untamed,Chaos,untamed-chaos,Black,Back,1,
+UD-CS1-F.png,UD-CS1-F,Untamed,Chaos,untamed-chaos,Black,Front,2,
+UD-CS2.png,UD-CS2,Untamed,Chaos,untamed-chaos,White,Back,1,
+UD-CS2-F.png,UD-CS2-F,Untamed,Chaos,untamed-chaos,White,Front,2,
+UD-DP1.png,UD-DP1,Untamed,Discipline,untamed-discipline,Black,Back,1,
+UD-DP1-F.png,UD-DP1-F,Untamed,Discipline,untamed-discipline,Black,Front,2,
+UD-DP2.png,UD-DP2,Untamed,Discipline,untamed-discipline,White,Back,1,
+UD-DP2-F.png,UD-DP2-F,Untamed,Discipline,untamed-discipline,White,Front,2,
+UD-FT1.png,UD-FT1,Untamed,Faith,untamed-faith,Black,Back,1,
+UD-FT1-F.png,UD-FT1-F,Untamed,Faith,untamed-faith,Black,Front,2,
+UD-FT2.png,UD-FT2,Untamed,Faith,untamed-faith,White,Back,1,
+UD-FT2-F.png,UD-FT2-F,Untamed,Faith,untamed-faith,White,Front,2,
+UD-FS1.png,UD-FS1,Untamed,Focus,untamed-focus,Black,Back,1,
+UD-FS1-F.png,UD-FS1-F,Untamed,Focus,untamed-focus,Black,Front,2,
+UD-FS2.png,UD-FS2,Untamed,Focus,untamed-focus,White,Back,1,
+UD-FS2-F.png,UD-FS2-F,Untamed,Focus,untamed-focus,White,Front,2,
+UD-FM1.png,UD-FM1,Untamed,Freedom,untamed-freedom,Black,Back,1,
+UD-FM1-F.png,UD-FM1-F,Untamed,Freedom,untamed-freedom,Black,Front,2,
+UD-FM2.png,UD-FM2,Untamed,Freedom,untamed-freedom,White,Back,1,
+UD-FM2-F.png,UD-FM2-F,Untamed,Freedom,untamed-freedom,White,Front,2,
+UD-HE.png,UD-HE,Untamed,Hustle,untamed-hustle,Black,Back,1,
+UD-HE-F.png,UD-HE-F,Untamed,Hustle,untamed-hustle,Black,Front,2,
+UD-IT1.png,UD-IT1,Untamed,Innocent,untamed-innocent,Black,Back,1,
+UD-IT1-F.png,UD-IT1-F,Untamed,Innocent,untamed-innocent,Black,Front,2,
+UD-IT2.png,UD-IT2,Untamed,Innocent,untamed-innocent,White,Back,1,
+UD-IT2-F.png,UD-IT2-F,Untamed,Innocent,untamed-innocent,White,Front,2,
+UD-LS1.png,UD-LS1,Untamed,Limitless,untamed-limitless,Black,Back,1,
+UD-LS1-F.png,UD-LS1-F,Untamed,Limitless,untamed-limitless,Black,Front,2,
+UD-LS2.png,UD-LS2,Untamed,Limitless,untamed-limitless,White,Back,1,
+UD-LS2-F.png,UD-LS2-F,Untamed,Limitless,untamed-limitless,White,Front,2,
+UD-LT1.png,UD-LT1,Untamed,Loyalty,untamed-grft-loyalty,Black,Back,1,verified: purple graffiti Loyalty
+UD-LT1-F.png,UD-LT1-F,Untamed,Loyalty,untamed-grft-loyalty,Black,Front,2,verified: purple graffiti Loyalty
+UD-LT2.png,UD-LT2,Untamed,Loyalty,untamed-grft-loyalty,White,Back,1,verified: purple graffiti Loyalty
+UD-LT2-F.png,UD-LT2-F,Untamed,Loyalty,untamed-grft-loyalty,White,Front,2,verified: purple graffiti Loyalty
+UD-LY1.png,UD-LY1,Untamed,Loyalty II,untamed-loyalty,Black,Back,1,verified: gold varsity LOYALTY
+UD-LY1-F.png,UD-LY1-F,Untamed,Loyalty II,untamed-loyalty,Black,Front,2,verified: gold varsity LOYALTY
+UD-LY2.png,UD-LY2,Untamed,Loyalty II,untamed-loyalty,White,Back,1,verified: gold varsity LOYALTY
+UD-LY2-F.png,UD-LY2-F,Untamed,Loyalty II,untamed-loyalty,White,Front,2,verified: gold varsity LOYALTY
+UD-RM.png,UD-RM,Untamed,Rave Mode,untamed-rave-mode,Black,Back,1,
+UD-RM-F.png,UD-RM-F,Untamed,Rave Mode,untamed-rave-mode,Black,Front,2,
+UD-RL1.png,UD-RL1,Untamed,Rebel,untamed-rebel,Black,Back,1,
+UD-RL1-F.png,UD-RL1-F,Untamed,Rebel,untamed-rebel,Black,Front,2,
+UD-RL2.png,UD-RL2,Untamed,Rebel,untamed-rebel,White,Back,1,
+UD-RL2-F.png,UD-RL2-F,Untamed,Rebel,untamed-rebel,White,Front,2,

@@ -1,10 +1,13 @@
 import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { collections } from '../constants/collections'
+import { useTint } from '../hooks/useTint'
 import { sectionNumber } from '../constants/sections'
 import { trackEvent } from '../lib/analytics'
 
 export function Collections() {
+  const tintFor = useTint()
+
   return (
     <section className="section collections" id="collections">
       <div className="section__head">
@@ -27,13 +30,13 @@ export function Collections() {
             className="world"
             key={collection.name}
             data-reveal
-            style={{ '--tint': collection.accent, '--delay': `${i * 0.06}s` } as CSSProperties}
+            style={{ '--tint': tintFor(collection.name), '--delay': `${i * 0.06}s` } as CSSProperties}
           >
             {/* The whole card is the target, so the label names the destination
                 rather than reading out the poster, blurb and triad in turn. */}
             <Link
               className="world__link"
-              to={`/store?collection=${collection.name}`}
+              to={`/?collection=${collection.name}`}
               aria-label={`View ${collection.name} designs`}
               onClick={() =>
                 trackEvent('select_content', {

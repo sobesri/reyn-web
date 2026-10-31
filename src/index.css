@@ -1,36 +1,110 @@
+/* ==========================================================================
+   Theme tokens
+
+   Light is the default. `[data-theme="dark"]` below restores the original
+   black editorial palette; index.html sets the attribute before first paint
+   so a saved choice never flashes the wrong theme.
+
+   The *-rgb channel triplets exist so translucent surfaces can be written as
+   `rgb(var(--ink-rgb) / 0.5)` and flip with the theme like everything else.
+   The --scrim-* / --on-scrim pair deliberately does NOT flip: those sit over
+   photography, which stays light-text-on-dark in both themes.
+   ========================================================================== */
+
 :root {
-  /* Core palette: dark editorial */
-  --ink: #08080a;
-  --ink-raised: #101014;
-  --ink-line: rgba(242, 240, 235, 0.1);
-  --paper: #f2f0eb;
-  --muted: #8e8e99;
-  --muted-dim: #5d5d68;
+  /* Core palette: light editorial */
+  --ink: #faf9f6;
+  --ink-rgb: 250 249 246;
+  --ink-deep-rgb: 255 255 255;
+  --ink-raised: #ffffff;
+  --ink-raised-rgb: 255 255 255;
+  --ink-line: rgba(8, 8, 10, 0.12);
+  --paper: #121216;
+  --paper-rgb: 18 18 22;
+  --muted: #55555f;
+  --muted-dim: #6b6b76;
 
   /* Single accent. Swap this one value to re-tint the whole site. */
-  --accent: #d4a64b;
-  --accent-ink: #08080a;
-  --accent-soft: rgba(212, 166, 75, 0.14);
-  --accent-line: rgba(212, 166, 75, 0.45);
-  --accent-fade: rgba(212, 166, 75, 0);
+  --accent: #8f6310;
+  --accent-ink: #fffdf6;
+  --accent-soft: rgba(143, 99, 16, 0.12);
+  --accent-line: rgba(143, 99, 16, 0.42);
+  --accent-fade: rgba(143, 99, 16, 0);
+
+  /* Atmosphere washes keep the original gold, which reads on either ground. */
+  --accent-glow-rgb: 212 166 75;
+  --accent-warm-rgb: 196 92 40;
+
+  /* Overlays on top of imagery: fixed across both themes. */
+  --scrim: rgba(8, 8, 10, 0.86);
+  --scrim-soft: rgba(8, 8, 10, 0.72);
+  --scrim-strong: rgba(4, 4, 6, 0.94);
+  --scrim-chip: rgba(16, 16, 20, 0.7);
+  --on-scrim: #f2f0eb;
+  --on-scrim-dim: #a6a6b0;
+  --on-scrim-line: rgba(242, 240, 235, 0.16);
+
+  /* The struck-through price before a launch discount: a red pulled well
+     off full saturation, so it marks the old price without shouting over
+     the live one. */
+  --was-price: #9c5555;
+
+  /* Cast shadow for a lifted surface. Dark in both themes — paper still
+     casts a grey shadow, it just falls softer. */
+  --cast-shadow: rgba(8, 8, 10, 0.26);
+
+  --grain-opacity: 0.028;
 
   --shell: min(1180px, 100% - 2 * var(--gutter));
   --gutter: 24px;
   --radius: 18px;
 
-  --sans: 'Space Grotesk', system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, 'Space Grotesk', Consolas, monospace;
+  /* Body copy, headings and controls. Arial leads so the site sets the same
+     way on every machine rather than falling to Calibri on Windows alone. */
+  --sans: Arial, Calibri, Helvetica, system-ui, sans-serif;
+  /* The face for eyebrows, chips, counters and every other small caps label.
+     The same grotesque for now, kept as its own token so the labels can be
+     re-cut without touching body copy. */
+  --label: Arial, Calibri, Helvetica, system-ui, sans-serif;
   /* Trajan-style serif to match the poster lettering. */
   --display: 'Cinzel', 'Times New Roman', serif;
 
   font: 400 17px/1.6 var(--sans);
-  color-scheme: dark;
+  color-scheme: light;
   color: var(--muted);
   background: var(--ink);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='dark'] {
+  /* Core palette: dark editorial */
+  --ink: #08080a;
+  --ink-rgb: 8 8 10;
+  --ink-deep-rgb: 4 4 6;
+  --ink-raised: #101014;
+  --ink-raised-rgb: 16 16 20;
+  --ink-line: rgba(242, 240, 235, 0.1);
+  --paper: #f2f0eb;
+  --paper-rgb: 242 240 235;
+  --muted: #8e8e99;
+  --muted-dim: #7a7a86;
+
+  --accent: #d4a64b;
+  --accent-ink: #08080a;
+  --accent-soft: rgba(212, 166, 75, 0.14);
+  --accent-line: rgba(212, 166, 75, 0.45);
+  --accent-fade: rgba(212, 166, 75, 0);
+
+  --was-price: #c99292;
+
+  --cast-shadow: rgba(4, 4, 6, 0.8);
+
+  --grain-opacity: 0.045;
+
+  color-scheme: dark;
 }
 
 @media (max-width: 1024px) {
@@ -131,5 +205,260 @@ img {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   Theme toggle
+
+   Lives in both the store nav and the landing page's floating actions, so it
+   is styled here rather than in either page's sheet.
+   ========================================================================== */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  padding: 0;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  background: rgb(var(--ink-raised-rgb) / 0.6);
+  color: var(--muted);
+  cursor: pointer;
+  transition:
+    border-color 200ms ease,
+    color 200ms ease,
+    background-color 200ms ease,
+    transform 200ms ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+/* In the floating action stack it matches the other pinned circles. */
+.floating-actions .theme-toggle {
+  width: 44px;
+  height: 44px;
+  background: rgb(var(--ink-raised-rgb) / 0.82);
+  backdrop-filter: blur(10px);
+}
+
+/* ==========================================================================
+   Site header
+
+   One sticky header for every route — the store, a product and the landing
+   page — so the cart, size guide and theme are always one reach away.
+   ========================================================================== */
+
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgb(var(--ink-rgb) / 0.82);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--ink-line);
+  isolation: isolate;
+}
+
+.site-nav__inner {
+  width: var(--shell);
+  margin-inline: auto;
+  padding-block: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+/* The wordmark plus the section it leads to, read as one lockup. */
+.site-nav__brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.site-nav__section {
+  padding-left: 12px;
+  border-left: 1px solid var(--ink-line);
+  font-family: var(--label);
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Centred, because the row mixes bare text links with taller controls: left
+   to stretch, the links would hang off the top of the buttons beside them. */
+.site-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(14px, 2.4vw, 28px);
+  font-family: var(--label);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.site-nav__links a,
+.site-nav__links .size-guide-btn {
+  transition: color 200ms ease;
+}
+
+.site-nav__links a:hover,
+.site-nav__links .size-guide-btn:hover {
+  color: var(--accent);
+}
+
+/* ==========================================================================
+   Mobile menu
+
+   Below 640px the header keeps the wordmark and a single trigger; everything
+   else moves into a drawer off the right edge. The trigger carries the cart
+   count, so a closed menu still says there is something waiting in it.
+   ========================================================================== */
+
+.site-nav__menu-btn {
+  position: relative;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--ink-line);
+  border-radius: 50%;
+  background: rgb(var(--ink-raised-rgb) / 0.6);
+  color: var(--paper);
+  cursor: pointer;
+}
+
+.site-nav__menu-count {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 18px;
+  height: 18px;
+  display: grid;
+  place-items: center;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  font-family: var(--label);
+  font-size: 11px;
+  line-height: 1;
+  color: var(--accent-ink);
+}
+
+.site-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: flex-end;
+  background: var(--scrim-soft);
+  backdrop-filter: blur(6px);
+  animation: site-menu-fade 180ms ease;
+}
+
+@keyframes site-menu-fade {
+  from { opacity: 0; }
+}
+
+.site-menu__panel {
+  width: min(280px, 82%);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  padding: calc(var(--site-nav-h, 64px) + 12px) var(--gutter) calc(var(--gutter) + 8px);
+  background: var(--ink);
+  border-left: 1px solid var(--ink-line);
+  animation: site-menu-in 240ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes site-menu-in {
+  from { transform: translateX(100%); }
+}
+
+/* The drawer stacks what the header lays out in a row, so the shared controls
+   need to fill the width and sit on their own line. */
+.site-menu__links {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  font-family: var(--label);
+  font-size: 13px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Two classes deep, because the shared buttons zero their own padding for
+   the header row and would otherwise sit flush against each other here. */
+.site-menu .site-menu__links > * {
+  width: 100%;
+  padding-block: 18px;
+  border-bottom: 1px solid var(--ink-line);
+  text-align: left;
+}
+
+.site-menu__links a:hover,
+.site-menu__links .size-guide-btn:hover,
+.site-menu__links .cart-btn:hover {
+  color: var(--accent);
+}
+
+.site-menu__foot {
+  display: flex;
+}
+
+/* In the drawer the toggle is a full row that says what it will do, rather
+   than an icon the size of a thumbnail. */
+.theme-toggle--labelled {
+  width: 100%;
+  height: auto;
+  justify-content: space-between;
+  gap: 14px;
+  padding: 14px 18px;
+  border-radius: 999px;
+}
+
+/* Tracked tighter than the nav labels: "Switch to light theme" is the
+   longest string in the drawer and has to hold one line at 280px. */
+.theme-toggle__label {
+  font-family: var(--label);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+  .site-nav__links {
+    display: none;
+  }
+
+  .site-nav__menu-btn {
+    display: flex;
+  }
+
+  .site-nav__section {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 641px) {
+  .site-menu {
+    display: none;
   }
 }

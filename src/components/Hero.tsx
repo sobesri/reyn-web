@@ -42,7 +42,7 @@ export function Hero() {
         </p>
 
         <div className="hero__actions" style={{ '--delay': '0.5s' } as CSSProperties}>
-          <Link className="btn btn--solid" to="/store">
+          <Link className="btn btn--solid" to="/">
             Shop the store
           </Link>
           <a className="btn btn--ghost" href="#collections">
