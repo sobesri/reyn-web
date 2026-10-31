@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "catalog:json": "node scripts/catalog-json.mjs"
+    "catalog:json": "node scripts/catalog-json.mjs",
+    "og:image": "node --max-old-space-size=2048 scripts/og-image.mjs"
   },
   "dependencies": {
     "@statsig/react-bindings": "^3.33.5",
